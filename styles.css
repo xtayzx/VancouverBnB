@@ -1,0 +1,153 @@
+* {
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    margin: 0;
+}
+
+/* Main title */
+h1 {
+    text-align: center;
+    margin-top: 3vh;
+    margin-bottom: 3vh;
+}
+
+/* Headings for each page */
+h2 {
+    text-align: center;
+    margin-top: 5vh;
+    margin-bottom: 3vh; 
+}
+
+
+/* Headings in the Model Details page */
+h3 {
+    color: #000000;
+    text-decoration: none;  
+}
+
+/* Links in the Watchlist */
+ul li a {
+    color: #02589e;
+    text-decoration: underline;    
+}
+
+/* HEADER  */
+.header-size {
+    width: 100%;
+    border-spacing: 0px;
+}
+
+.header-background {
+    height: 160px;
+    background-color:#b40b0b;
+}
+
+.header-title {
+    font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-size: 66px;
+    color: white;
+    text-align: center;
+}
+
+.user-text {
+    color: #f8d5d5;
+    margin: 0 0 0.5em 0;
+}
+
+.menu-size {
+    height: 120px;
+    background-color: rgb(73, 34, 34);
+}
+
+.menu-font {
+    font-size:24px;
+    color:white;
+    text-align:center;
+}
+
+.menu-font a, .menu-font a:visited {
+    color: #FFFFFF;
+    text-decoration: none;
+}
+
+.menu-font a:hover {
+    color:#ff7f7f;
+}
+
+/* HOME PAGE */
+.table-header {
+    text-align:center;
+    width:300px;
+    height:50px;
+}
+
+.table-contents {
+    height: 60px;
+    text-align: center;
+}
+
+.table-contents a {
+    color:#02589e;
+    text-decoration: none;
+}
+
+.table-contents a:hover, .main-button a:hover{
+    text-decoration: underline;
+} 
+
+/* FOOTER */
+
+.footer {
+    width: 100%;
+    border-spacing:0px;
+}
+
+.footer-cell {
+    height:100px;
+    background-color:#000000;
+    font-size:16px;
+    color:white;
+    text-align:center;
+}
+
+/* GENERAL */
+.form-center {
+    width: 375px;
+    margin: 0 auto;
+ }
+
+ /* MAIN WIDTH TABLE */
+.main-table {
+    width: 750px;
+    margin: 0 auto;
+ }
+
+.page-content {
+    text-align: left;
+    margin: 0 30vw 0 30vw;
+}
+
+.text-center {
+    text-align: center;
+}
+
+/* BUTTON */
+.main-button, .main-button a, .main-button a:visited{
+    background-color: #02589e;
+    color:#FFFFFF;
+    text-decoration: none;
+    margin-bottom: 2em;
+}
+
+textarea {
+    resize: vertical;
+}
+
+.submit-button {
+    margin-top: 2em;
+    margin-bottom: 2em;
+}
+
+.margin-top {
+    margin-top: 2em;
+}
+
