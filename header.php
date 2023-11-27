@@ -1,4 +1,6 @@
 <?php
+    echo error_reporting();
+
     if(!isset($page_title)) {
         $page_title = "Title";
     }
