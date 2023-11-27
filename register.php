@@ -18,7 +18,7 @@
             isset($_POST["password_confirm"]) ) {
             
                 if($_POST["password"] == $_POST["password_confirm"]){
-                $sql = "SELECT count(*) AS count FROM user WHERE username = ?";
+                $sql = "SELECT count(*) AS count FROM users WHERE username = ?";
 
                 $stmt = $db->prepare($sql);
 
