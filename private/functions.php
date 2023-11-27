@@ -44,7 +44,7 @@
   function is_in_watchlist($code) {
     global $db;
     if (isset($_SESSION['valid_user'])) {
-      $query = "SELECT COUNT(*) FROM watchlist WHERE productCode=? AND username=?";
+      $query = "SELECT COUNT(*) FROM watchlist WHERE listing_id=? AND username=?";
       $stmt = $db->prepare($query);
       $stmt->bind_param('ss',$code, $_SESSION['valid_user']);
       $stmt->execute();

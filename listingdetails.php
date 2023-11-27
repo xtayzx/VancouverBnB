@@ -23,6 +23,10 @@
     $stmt->execute();
     $search_result = $stmt->get_result();
 
+    if (!empty($msg) ) {
+        echo "<p>$msg</p>\n";
+    }
+
     //start the table of details
     if($search_result->fetch_row() != 0) {
 
@@ -124,9 +128,11 @@
         echo "<input type=\"hidden\" name=\"id\" value=$code>\n";
         echo "<input type=\"submit\" class=\"main-button\" value=\"Add To Watchlist\">\n";
         echo "</form>\n";
-    } else if (!empty($msg) ) {
-        echo "<p>$msg</p>\n";
-    } else if (is_logged_in()) {
+    } 
+    // else if (!empty($msg) ) {
+    //     echo "<p>$msg</p>\n";
+    // } 
+    else if (is_logged_in()) {
         echo "<p>This listing is already in your <a href=\"watchlist.php\">watchlist</a>.</p><br><br>";
     }
 
