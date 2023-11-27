@@ -41,7 +41,7 @@
                 //on success
                 else{
                     $hash_pass = password_hash($_POST["password"], PASSWORD_DEFAULT);
-                    $sql = "INSERT INTO user (first_name, last_name, email, username, hashed_password) 
+                    $sql = "INSERT INTO users (first_name, last_name, email, username, hashed_password) 
                     VALUES (?,?,?,?,?)";
                     $stmt = mysqli_prepare($db, $sql);
                     mysqli_stmt_bind_param($stmt,"sssss", 

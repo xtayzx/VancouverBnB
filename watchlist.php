@@ -29,7 +29,7 @@
 
     //function to generate all the products in the users watchlist
     function model_link($code,$name,$page) {
-        echo "<a href=\"$page?productCode=$code\">$name</a>";
+        echo "<a href=\"$page?id=$code\">$name</a>";
     }
 
     while ($row = $res->fetch_row()) {

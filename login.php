@@ -13,7 +13,7 @@
     if(is_post_request()) {
 
         $username = $_POST["username"];
-        $sql = "SELECT username, hashed_password FROM user WHERE username = ?";
+        $sql = "SELECT username, hashed_password FROM users WHERE username = ?";
         $stmt = $db->prepare($sql);
 
         //check for query error
