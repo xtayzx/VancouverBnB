@@ -1,0 +1,83 @@
+<?php
+    include("private/initialize.php");
+    require_SSL();
+
+    $username = '';
+    $password = '';
+
+    //if session is detected, then redirect
+    if(is_logged_in()) {
+        redirect_to($_SESSION["callback_url"]);
+    }
+
+    if(is_post_request()) {
+
+        $username = $_POST["username"];
+        $sql = "SELECT username, hashed_password FROM user WHERE username = ?";
+        $stmt = $db->prepare($sql);
+
+        //check for query error
+        if(!$stmt) {
+            die("Error is:".$db->error);
+        }
+
+        $stmt->bind_param('s',$username);
+        $stmt->execute();
+        $result = $stmt->get_result();      
+
+        //START THE TABLE
+        if($result->fetch_row() > 0) {
+
+            // //has to go back to the first of the array
+            $result->data_seek(0);
+
+            $password = mysqli_fetch_assoc($result)["hashed_password"];
+
+            if(password_verify($_POST["password"], $password)) {
+                $_SESSION["valid_user"] = $username;
+                if (!isset($_SESSION["callback_url"])) {
+                    $_SESSION["callback_url"] = "watchlist.php";
+                }
+                redirect_to($_SESSION["callback_url"]);
+            }
+
+            else {
+                echo "<p>Incorrect password. Please try again.</p>";
+            }
+        }
+    
+        //if the table cannot be generated
+        else  {
+            echo "<p>Incorrect username or this user does not exist. Please try again.</p>";
+        }
+
+        $stmt->free_result();
+
+    }
+
+    $page_title = "Login";
+    require("header.php");
+
+    if (!empty($msg) ) {
+        echo "<p>$msg</p>\n";
+    }
+?>
+
+<!-- generate the form -->
+<div class="page-content, text-center">
+    <form action="login.php" method="post" class="text-center">
+        Username:<br />
+        <input type="text" name="username" value="" /><br />
+        <br>
+        Password:<br />
+        <input type="password" name="password" value="" /><br />
+        <input type="submit" class="submit-button"/>
+    </form>
+
+    <button class="main-button"><a href="register.php">Not registered yet? Register here.</a></button>
+</div>
+
+<?php
+    $db->close();
+    include("footer.php");
+?>
