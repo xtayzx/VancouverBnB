@@ -23,7 +23,7 @@
     if (isset($message)) echo "<p>$message</p>";
 
     if(is_post_request()) {
-        $update_query = "UPDATE users SET neighbourhood_preference = ? WHERE username = ?";
+        $update_query = "UPDATE users SET first_name = ?, last_name = ?, neighbourhood_preference = ? WHERE username = ?";
         $stmt = $db->prepare($update_query);
 
         //check for query error
@@ -31,7 +31,7 @@
             die("Error is:".$db->error);
         }
     
-        $stmt->bind_param('ss',$_POST["neighbourhood_preference"], $_SESSION["valid_user"]);
+        $stmt->bind_param('ssss',$_POST["first_name"], $_POST["last_name"], $_POST["neighbourhood_preference"], $_SESSION["valid_user"]);
         $stmt->execute();
         $stmt->free_result();
 
@@ -41,23 +41,61 @@
         header("Location: profile.php");
     }
 
+    $profile_query = "SELECT first_name, last_name, neighbourhood_preference FROM users WHERE username = ?";
+    $stmt = $db->prepare($profile_query);
 
-    ?>
+    //check for query error
+    if(!$stmt) {
+        die("Error is:".$db->error);
+    }
 
-<div class="page-content, text-center">
-    <form action="edit.php" method="post">
-    
+    $stmt->bind_param('s',$_SESSION["valid_user"]);
+    $stmt->execute();
+    $search_result = $stmt->get_result();
+
+    if (!empty($msg) ) {
+        echo "<p>$msg</p>\n";
+    }
+
+    //start the table of details
+    if($search_result->fetch_row() != 0) {
+
+        //has to go back to the first of the array
+        $search_result->data_seek(0);
+
+        while($row = $search_result->fetch_assoc()) {
+
+        $first_name = $row["first_name"];
+        $last_name = $row["last_name"];
+        $neighbourhood = $row["neighbourhood_preference"];
+        }
+    }
+
+    else  {
+        echo "<p>The information could not be displayed.</p><br>";
+    }
+
+    $stmt->free_result();
+
+echo "<div class=\"page-content, text-center\">";
+    echo "<form action=\"edit.php\" method=\"post\">";
+        echo "First Name:<br />";
+        echo "<input type=\"text\" name=\"first_name\" value=\"".$first_name."\" required /><br><br>";
+        echo "Last Name:<br />";
+        echo "<input type=\"text\" name=\"last_name\" value=\"".$last_name."\" required /><br><br>";
+
+        ?>
         Neighbourhood Preference<br />
 
         <select id="neighbourhood_preference" name="neighbourhood_preference">
             <option value="" selected>---Select Neighbourhood---</option>
 
-            <!-- Display all the order numbers in the database -->
+
             <?php
                 //if the result is greater than zero
                 if ($neighbourhood_result->fetch_row() > 0) {
 
-                //display all the order numbers - if the selected order number is the same when it generates the dropdown, select that value to view as checked
+                    //display all neighbourhoods
                 while ($row = $neighbourhood_result->fetch_assoc()) {      
                     if($neighbourhood === $row['neighbourhood']) {
                         echo "<option value=\"".$row['neighbourhood']."\" selected>".$row['neighbourhood']."</option>";

@@ -49,9 +49,11 @@
 
         echo "<p><b>First Name: </b></p>";
         echo "<p>".$row["first_name"]."</p><br>";
+        $first_name = $row["first_name"];
 
         echo "<p><b>Last Name: </b></p>";
         echo "<p>".$row["last_name"]."</p><br>";
+        $last_name = $row["last_name"];
 
         echo "<p><b>Email: </b></p>";
         echo "<p>".$row["email"]."</p><br>";
@@ -71,6 +73,14 @@
     }
 
     $stmt->free_result();
+    // echo "<p>$first_name</p>";
+    // echo "<p>$last_name</p>";
+
+    // echo "<form action=\"edit.php\" method=\"post\">\n";
+    // echo "<input type=\"hidden\" name=\"first_name\" value=$first_name>\n";
+    // echo "<input type=\"hidden\" name=\"last_name\" value=$last_name>\n";
+    // echo "<input type=\"submit\" class=\"main-button\" value=\"Change Your Preferences\">\n";
+    // echo "</form>\n";
 
     echo "<button class=\"main-button margin-top\"><a href=\"edit.php\">Change Your Preferences</a></button>";
 
