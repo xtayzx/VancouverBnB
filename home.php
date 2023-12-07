@@ -31,10 +31,7 @@
     $page_title = "Welcome";
     no_SSL();
     require("header.php");
-    
-?>
 
-        <?php
         //PREPARING THE QUERY
         //if there is a query selected, order number must be selected for the query to generate properly
         // if(isset()) {
@@ -43,6 +40,10 @@
             //     echo "The column \"Order Number\" is mandatory for the results to run properly. Please try again.";
             //     exit();
             // }
+
+            if(is_logged_in()) {
+                echo "<h3>Here are some recommendations in your preferred neighbourhood!</h3><br>";
+            }
 
             $stmt = $db->prepare($query);
 

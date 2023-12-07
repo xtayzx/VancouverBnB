@@ -28,11 +28,6 @@
                         echo $_SESSION['valid_user'] ?? '';
                         ?></p>
 
-                        <strong><p class="user-text">Neighbourhood Pref: <?php
-
-                        //check for if session is set, if is, display the username
-                        echo $_SESSION['neighbourhood_preference'] ?? '';
-                        ?></p>
                         <a href="home.php">Home</a> |
                         <a href="listings.php">Search Listings</a> |
                         <a href="profile.php">Profile</a> |

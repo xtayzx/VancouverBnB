@@ -1,5 +1,6 @@
 <?php
     require_once("private/initialize.php");
+    date_default_timezone_set('UTC');
 
     //Identify what is passed in the URL
     $code = trim($_GET["id"]);
@@ -9,7 +10,7 @@
     require("header.php");
 
     if(is_post_request()) {
-        $t = time();
+        $t = date("Y-m-d H:i:s");
         $sql = "INSERT INTO comments (listing_id, timestamp, username, comment) 
         VALUES (?,?,?,?)";
         $stmt = mysqli_prepare($db, $sql);
@@ -23,11 +24,11 @@
         $stmt->bind_param('ssss', $code, $t, $_SESSION["valid_user"], $_POST["comment"]);
         $res = $stmt->execute();
 
-        if($res){
-            // $_SESSION["valid_user"] = $_POST["username"];
-            // $_SESSION["neighbourhood_preference"] = $_POST["neighbourhood_preference"];
-            // header("Location: listings.php");
-        }
+        // if($res){
+        //     // $_SESSION["valid_user"] = $_POST["username"];
+        //     // $_SESSION["neighbourhood_preference"] = $_POST["neighbourhood_preference"];
+        //     // header("Location: listings.php");
+        // }
 
         $stmt->free_result();
     }
@@ -48,7 +49,7 @@
     $search_result = $stmt->get_result();
 
     if (!empty($msg) ) {
-        echo "<p>$msg</p>\n";
+        echo "<p>$msg</p><br>\n";
     }
 
     //start the table of details
@@ -149,8 +150,6 @@
 
     $stmt->free_result();
 
-    //TODO: figure out the comments
-
     //if the product is not in the watchlist, else if there is a message to display, else if the user is logged in
     if(!is_in_watchlist($code) ) {
         echo "<form action=\"addtowatchlist.php\" method=\"post\">\n";
@@ -162,7 +161,7 @@
     //     echo "<p>$msg</p>\n";
     // } 
     else if (is_logged_in()) {
-        echo "<p>This listing is already in your <a href=\"watchlist.php\">watchlist</a>.</p><br><br>";
+        echo "<p>This listing is already in your <a href=\"profile.php\">watchlist</a>.</p><br><br>";
     }
 
     echo "<button class=\"main-button margin-top\"><a href=\"listings.php\">Back to All Listings</a></button>";
@@ -197,7 +196,7 @@
                 while($row = $search_result->fetch_assoc()) {
 
                 //NAME
-                echo "<h2>".$row["username"]."</h2>";
+                echo "<h5>".$row["username"]." | " .$row["timestamp"]."</h5>";
                 echo "<p>".$row["comment"]."</p>";
                 echo "<br>";
 
@@ -217,7 +216,7 @@
                 echo "<form method=\"post\">";
                 echo "<h4>Submit a Comment</h4><br>";
                 echo "<label>Enter Comment: </label><br>";
-                echo "<textarea rows=\"5\" cols=\"60\"></textarea><br><br>";
+                echo "<textarea name=\"comment\" rows=\"5\" cols=\"60\"></textarea><br><br>";
                 echo "<input type=\"submit\" id=\"submit\" value=\"Submit Comment\"/>";
                 echo "</form></div><br>";
             }

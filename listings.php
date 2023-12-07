@@ -163,9 +163,9 @@ if(isset($_POST['neighbourhood']) || isset($_POST['startDate']) || isset($_POST[
             //START THE TABLE
             if($search_result->fetch_row() !=0) {
                 // delete later
-                echo "<br>";
-                echo "<h4>SQL Query: </h4>";
-                echo "<p>".$show_query."</p>";
+                // echo "<br>";
+                // echo "<h4>SQL Query: </h4>";
+                // echo "<p>".$show_query."</p>";
                 //------
 
                 // echo "<h2>Result</h2>";
@@ -184,19 +184,10 @@ if(isset($_POST['neighbourhood']) || isset($_POST['startDate']) || isset($_POST[
 
                 //create the table rows
                 while($row = $search_result->fetch_assoc()) {
-                    // echo "<tr>";
-
-                    //     echo "<td><a href=\"listingdetails.php?id=$id\"" . $row['name'] ."</td>";
-                    //     echo "<td>" . $row['neighbourhood'] ."</td>";
-                    //     echo "<td>" . $row['price'] ."</td>";
-                    
-                    // echo "</tr>";
 
                     table_contents($row['id'], $row['name'], $row['neighbourhood'], $row['price']);
                 }
 
-                // echo "</tr>
-                // </table>";
                 table_end();
             }
           
@@ -205,7 +196,6 @@ if(isset($_POST['neighbourhood']) || isset($_POST['startDate']) || isset($_POST[
             }
 
             $stmt->free_result();
-            // $db->close();
         }
     $db->close();
     include_once("footer.php");
