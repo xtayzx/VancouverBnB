@@ -1,7 +1,28 @@
-<table class="footer">
+            <table class="footer">
                 <tr class="footer-cell">
                     <td>IAT 352</td>
                 </tr>
         </table>
+
+        <!-- <script src = "http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.js"></script>
+
+        <script>
+            // Creating map options
+            var mapOptions = {
+            center: [17.385044, 78.486671],
+            zoom: 10
+            }
+            
+            // Creating a map object
+            var map = new L.map('map', mapOptions);
+            
+            // Creating a Layer object
+            var layer = new L.TileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png');
+            
+            // Adding layer to the map
+            map.addLayer(layer);
+        </script> -->
+
     </body>
+    
 </html>

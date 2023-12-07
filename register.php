@@ -6,6 +6,17 @@
         header("Location: listings.php");
     }
 
+   // query to display the dropdown of order numbers properly
+    $neighbourhood_query = "SELECT neighbourhood FROM listings GROUP BY neighbourhood ASC";
+    $neighbourhood_result = $db->query($neighbourhood_query);
+    $neighbourhood_row = $neighbourhood_result->fetch_assoc();
+        
+    //if there is no result, throw the error
+    if(!$neighbourhood_result) {
+        echo $db->error;
+        exit();
+    }
+
     if(is_post_request()) {
         //check for existing account, if not save entry
         //redirect after done
@@ -15,7 +26,8 @@
             isset($_POST["email"]) &&
             isset($_POST["username"]) &&
             isset($_POST["password"]) &&
-            isset($_POST["password_confirm"]) ) {
+            isset($_POST["password_confirm"]) &&
+            isset($_POST["neighbourhood_preference"])) {
             
                 if($_POST["password"] == $_POST["password_confirm"]){
                 $sql = "SELECT count(*) AS count FROM users WHERE username = ?";
@@ -41,22 +53,24 @@
                 //on success
                 else{
                     $hash_pass = password_hash($_POST["password"], PASSWORD_DEFAULT);
-                    $sql = "INSERT INTO users (first_name, last_name, email, username, hashed_password) 
-                    VALUES (?,?,?,?,?)";
+                    $sql = "INSERT INTO users (first_name, last_name, email, username, hashed_password, neighbourhoodPreference) 
+                    VALUES (?,?,?,?,?,?)";
                     $stmt = mysqli_prepare($db, $sql);
-                    mysqli_stmt_bind_param($stmt,"sssss", 
+                    mysqli_stmt_bind_param($stmt,"ssssss", 
                     $_POST["first_name"],
                     $_POST["last_name"],
                     $_POST["email"],
                     $_POST["username"],
-                    $hash_pass);
+                    $hash_pass,
+                    $_POST["neighbourhood_preference"]);
 
                     $stmt = $db->prepare($sql);
-                    $stmt->bind_param('sssss',$_POST["first_name"], $_POST["last_name"], $_POST["email"], $_POST["username"], $hash_pass);
+                    $stmt->bind_param('ssssss',$_POST["first_name"], $_POST["last_name"], $_POST["email"], $_POST["username"], $hash_pass, $_POST["neighbourhood_preference"]);
                     $res = $stmt->execute();
 
                     if($res){
                         $_SESSION["valid_user"] = $_POST["username"];
+                        $_SESSION["neighbourhood_preference"] = $_POST["neighbourhood_preference"];
                         header("Location: listings.php");
                         }
                     }
@@ -87,6 +101,27 @@
         <input type="password" name="password" value="" required /><br><br>
         Confirm Password:<br />
         <input type="password" name="password_confirm" value="" required /><br><br>
+        Neighbourhood Preference<br />
+
+        <select id="neighbourhood_preference" name="neighbourhood_preference">
+            <option value="" selected>---Select Neighbourhood---</option>
+
+            <!-- Display all the order numbers in the database -->
+            <?php
+                //if the result is greater than zero
+                if ($neighbourhood_result->fetch_row() > 0) {
+
+                //display all the order numbers - if the selected order number is the same when it generates the dropdown, select that value to view as checked
+                while ($row = $neighbourhood_result->fetch_assoc()) {      
+                    if($neighbourhood === $row['neighbourhood']) {
+                        echo "<option value=\"".$row['neighbourhood']."\" selected>".$row['neighbourhood']."</option>";
+                    }
+                    else echo "<option value=\"".$row['neighbourhood']."\">".$row['neighbourhood']."</option>";
+                    }
+                }
+            ?>
+            </select>
+            <br><br>
         <input class="main-button" type="submit" />
     </form>
 </div>

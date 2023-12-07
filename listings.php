@@ -76,7 +76,7 @@ if(isset($_POST['neighbourhood']) || isset($_POST['startDate']) || isset($_POST[
     $query = $display_query.$str_from.$str_where." GROUP BY listings.id ASC LIMIT 50";
 }
 
-    $page_title = "Welcome";
+    $page_title = "Search Listings";
     no_SSL();
     require("header.php");
     

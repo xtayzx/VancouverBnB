@@ -4,6 +4,7 @@
 
     $username = '';
     $password = '';
+    $neighbourhood = '';
 
     //if session is detected, then redirect
     if(is_logged_in()) {
@@ -13,7 +14,7 @@
     if(is_post_request()) {
 
         $username = $_POST["username"];
-        $sql = "SELECT username, hashed_password FROM users WHERE username = ?";
+        $sql = "SELECT username, hashed_password, neighbourhood_preference FROM users WHERE username = ?";
         $stmt = $db->prepare($sql);
 
         //check for query error
@@ -30,15 +31,28 @@
 
             // //has to go back to the first of the array
             $result->data_seek(0);
+            // $password = mysqli_fetch_assoc($result)["hashed_password"];
 
-            $password = mysqli_fetch_assoc($result)["hashed_password"];
+            while($row = $result->fetch_assoc()) {
+                $password = $row["hashed_password"];
+                $neighbourhood = $row["neighbourhood_preference"];
+            }
 
             if(password_verify($_POST["password"], $password)) {
+                // $neighbourhood = mysqli_fetch_assoc($result)["neighbourhood_preference"];
+
                 $_SESSION["valid_user"] = $username;
+                $_SESSION["neighbourhood_preference"] = $neighbourhood;
+
+                // $_SESSION["neighbourhood_preference"] = mysqli_fetch_assoc($result)["neighbourhood_preference"];
+
                 if (!isset($_SESSION["callback_url"])) {
-                    $_SESSION["callback_url"] = "watchlist.php";
+                    $_SESSION["callback_url"] = "profile.php";
                 }
+
                 redirect_to($_SESSION["callback_url"]);
+                // echo "<p>test - ".$neighbourhood."
+                // </p>";
             }
 
             else {

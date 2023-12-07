@@ -7,6 +7,30 @@
 
     $page_title = "Listing Details";
     require("header.php");
+
+    if(is_post_request()) {
+        $t = time();
+        $sql = "INSERT INTO comments (listing_id, timestamp, username, comment) 
+        VALUES (?,?,?,?)";
+        $stmt = mysqli_prepare($db, $sql);
+        mysqli_stmt_bind_param($stmt,"ssss", 
+        $code,
+        $t,
+        $_SESSION["valid_user"],
+        $_POST["comment"]);
+
+        $stmt = $db->prepare($sql);
+        $stmt->bind_param('ssss', $code, $t, $_SESSION["valid_user"], $_POST["comment"]);
+        $res = $stmt->execute();
+
+        if($res){
+            // $_SESSION["valid_user"] = $_POST["username"];
+            // $_SESSION["neighbourhood_preference"] = $_POST["neighbourhood_preference"];
+            // header("Location: listings.php");
+        }
+
+        $stmt->free_result();
+    }
  ?>
 
 <div class="page-content">
@@ -34,9 +58,16 @@
         $search_result->data_seek(0);
         while($row = $search_result->fetch_assoc()) {
 
+        //IMAGE
+        echo "<img class=\"listing-img\" src=\"".$row["picture_url"]."\">";
+
         //NAME
-        // echo "<h3>Listing Name</h3>";
         echo "<h2>".$row["name"]."</h2>";
+        echo "<br>";
+
+        //ORIGINAL POSTING
+        echo "<h3>Original Posting</h3>";
+        echo "<p><a href=\"".$row["listing_url"]."\">Click Here</a></p>";
         echo "<br>";
 
         //DESCRIPTION
@@ -49,16 +80,11 @@
         echo "<p>".$row["neighborhood_description"]."</p>";
         echo "<br>";
 
-        //LISTING ID
-        echo "<h3>Listing ID</h3>";
-        echo "<p><a href=\"".$row["listing_url"]."\">Click Here</a></p>";
-        echo "<br>";
-
-        //PICTURE URL
-        //TODO: something with this to display it
-        echo "<h3>Picture URL</h3>";
-        echo "<p><a href=\"".$row["picture_url"]."\">Click Here</a></p>";
-        echo "<br>";
+        // //PICTURE URL
+        // //TODO: something with this to display it
+        // echo "<h3>Picture URL</h3>";
+        // echo "<p><a href=\"".$row["picture_url"]."\">Click Here</a></p>";
+        // echo "<br>";
 
         //LOCATION COORDINATES
         echo "<h3>Lat and Long</h3>";
@@ -110,6 +136,9 @@
         echo "<p>Value: ".$row["review_scores_value"]."</p>";
         echo "<p>Reviews Per Month: ".$row["reviews_per_month"]."</p>";
         echo "<br>";
+
+        // echo "<div id =”my-map” style = “width:800px; height:600px;”><p>This Map</p></div>";
+
         }
     }
         
@@ -137,9 +166,67 @@
     }
 
     echo "<button class=\"main-button margin-top\"><a href=\"listings.php\">Back to All Listings</a></button>";
+    ?>
 
-    echo "</div><br>";
 
-    $db->close();
-    include("footer.php");
-?>
+        <h3>All Comments</h3><br>
+
+        <?php
+            $comment_query = "SELECT * FROM comments WHERE comments.listing_id = ?";
+            $stmt = $db->prepare($comment_query);
+
+            //check for query error
+            if(!$stmt) {
+                die("Error is:".$db->error);
+            }
+
+            $stmt->bind_param('s',$code);
+            $stmt->execute();
+            $search_result = $stmt->get_result();
+
+            if (!empty($msg) ) {
+                echo "<p>$msg</p>\n";
+            }
+
+            //start the table of details
+            if($search_result->fetch_row() != 0) {
+
+                //has to go back to the first of the array
+                $search_result->data_seek(0);
+
+                while($row = $search_result->fetch_assoc()) {
+
+                //NAME
+                echo "<h2>".$row["username"]."</h2>";
+                echo "<p>".$row["comment"]."</p>";
+                echo "<br>";
+
+                // echo "<div id =”my-map” style = “width:800px; height:600px;”><p>This Map</p></div>";
+
+                }
+            }
+                
+            //if the table cannot be generated
+            else  {
+                echo "<p>There are no comments for this listing.</p><br>";
+            }
+
+            $stmt->free_result();
+
+            if(is_logged_in()) {
+                echo "<form method=\"post\">";
+                echo "<h4>Submit a Comment</h4><br>";
+                echo "<label>Enter Comment: </label><br>";
+                echo "<textarea rows=\"5\" cols=\"60\"></textarea><br><br>";
+                echo "<input type=\"submit\" id=\"submit\" value=\"Submit Comment\"/>";
+                echo "</form></div><br>";
+            }
+
+            else {
+                echo "</div><br>";
+            }
+
+        $db->close();
+
+        include("footer.php");
+    ?>
