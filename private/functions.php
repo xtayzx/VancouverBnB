@@ -58,17 +58,19 @@
   function table_header() {
     echo "<table class=\"main-table\">\n";
     echo "<tr style=\"background-color:#b40b0b\">
+    <th class=\"table-header\" style=\"color:#FFFFFF\"><p>Image</p></th>
     <th class=\"table-header\" style=\"color:#FFFFFF\"><p>Name</p></th>
     <th class=\"table-header\" style=\"color:#FFFFFF\"><p>Neighbourhood</p></th>
     <th class=\"table-header\" style=\"color:#FFFFFF\"><p>Price</p></th>
     </tr>";
   }
 
-  function table_contents($id, $name, $neighbourhood, $price) {
+  function table_contents($id, $image, $name, $neighbourhood, $price) {
     static $even = true;
     echo "<tr class=\"table-contents\"";
     if ($even) echo " style=\"background-color:#e3a9a3\""; //change colour for odd rows
     echo "><td>
+    <img class=listing-img src=\"$image\"></td><td>
     <a href=\"listingdetails.php?id=$id\">$name</a></td><td>$neighbourhood</td><td>$price</td>
     </tr>";
     $even = !$even; //alternate rows for colour changing

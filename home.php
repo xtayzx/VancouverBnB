@@ -3,7 +3,7 @@
 
     if(is_logged_in() && isset($_SESSION["neighbourhood_preference"])) {
         //displaying the query on the page with the filled values (which will be added to the string later)
-        $display_query = "SELECT listings.id, listings.name, listings.neighbourhood, listings.price";
+        $display_query = "SELECT listings.id, listings.name, listings.neighbourhood, listings.price, listings.picture_url";
         $str_from = " FROM listings";
         $str_where = " WHERE listings.neighbourhood = ? ";
 
@@ -14,7 +14,7 @@
 
     else if (empty($_SESSION["neighbourhood_preference"])){
         //display results of those that are the most popular
-        $display_query = "SELECT listings.id, listings.name, listings.neighbourhood, listings.price, listings.review_scores_rating";
+        $display_query = "SELECT listings.id, listings.name, listings.neighbourhood, listings.price, listings.review_scores_rating, listings.picture_url";
         $str_from = " FROM listings";
         $str_where = " WHERE listings.review_scores_rating = ?";
 
@@ -63,7 +63,7 @@
                 //create the table rows
                 while($row = $search_result->fetch_assoc()) {
 
-                    table_contents($row['id'], $row['name'], $row['neighbourhood'], $row['price']);
+                    table_contents($row['id'], $row['picture_url'], $row['name'], $row['neighbourhood'], $row['price']);
                 }
 
                 table_end();

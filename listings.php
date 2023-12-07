@@ -69,7 +69,7 @@ if(isset($_POST['neighbourhood']) || isset($_POST['startDate']) || isset($_POST[
     }
 
     //displaying the query on the page with the filled values (which will be added to the string later)
-    $display_query = "SELECT listings.id, listings.name, listings.neighbourhood, listings.price";
+    $display_query = "SELECT listings.id, listings.name, listings.neighbourhood, listings.price, listings.picture_url";
 
     //creating the prepared statement
     //TODO: How to pagenate the query rather than just having 50
@@ -172,7 +172,7 @@ if(isset($_POST['neighbourhood']) || isset($_POST['startDate']) || isset($_POST[
                 //create the table rows
                 while($row = $search_result->fetch_assoc()) {
 
-                    table_contents($row['id'], $row['name'], $row['neighbourhood'], $row['price']);
+                    table_contents($row['id'], $row['picture_url'], $row['name'], $row['neighbourhood'], $row['price']);
                 }
 
                 table_end();
