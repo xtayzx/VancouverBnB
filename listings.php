@@ -58,12 +58,23 @@ if(isset($_POST['neighbourhood']) || isset($_POST['startDate']) || isset($_POST[
         $str_where = " WHERE listings.neighbourhood = ? AND calendar.date >= ? AND calendar.date <= ? AND calendar.available = \"t\"";
     }         
     
+    if(isset($_POST["sort"])) {
+        if($_POST["sort"] == "Price") {
+            $group_by = " GROUP BY listings.price ASC LIMIT 50";
+        }
+
+        else if($_POST["sort"] == "ID") {
+            $group_by = " GROUP BY listings.id ASC LIMIT 50";
+        }
+    }
+
     //displaying the query on the page with the filled values (which will be added to the string later)
     $display_query = "SELECT listings.id, listings.name, listings.neighbourhood, listings.price";
 
     //creating the prepared statement
     //TODO: How to pagenate the query rather than just having 50
-    $query = $display_query.$str_from.$str_where." GROUP BY listings.id ASC LIMIT 50";
+    // $query = $display_query.$str_from.$str_where." GROUP BY listings.id ASC LIMIT 50";
+    $query = $display_query.$str_from.$str_where.$group_by;
 }
 
     $page_title = "Search Listings";
@@ -106,7 +117,15 @@ if(isset($_POST['neighbourhood']) || isset($_POST['startDate']) || isset($_POST[
             
             <label>To: </label>
             <input type="date" name="endDate" value="<?php echo $endDate?>" min="2023-10-01" max="2024-03-01">
-                <br>
+            <br>
+            <br>
+
+            <label>Sort By: </label><br>
+            <input type="radio" name="sort" value="ID" checked>
+            <label>ID</label><br>
+            <input type="radio" name="sort" value="Price">
+            <label>Price</label>
+            <br>
             <br>
             <input type="submit" id="submit" value="Search Listings"/>
         </form>

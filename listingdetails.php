@@ -6,6 +6,8 @@
     $code = trim($_GET["id"]);
     @$msg = trim($_GET["message"]);
 
+    $host_id = '';
+
     $page_title = "Listing Details";
     require("header.php");
 
@@ -72,9 +74,10 @@
         echo "<br>";
 
         //HOST ID
-        echo "<h3>Host ID</h3>";
-        echo "<p><a href=\"host.php?id=".$row["host_id"]."\">".$row["host_id"]."</a></p>";
-        echo "<br>";
+        // echo "<h3>Host ID</h3>";
+        // echo "<p><a href=\"host.php?id=".$row["host_id"]."\">".$row["host_id"]."</a></p>";
+        $host_id = $row["host_id"];
+        // echo "<br>";
 
         //DESCRIPTION
         echo "<h3>Description</h3>";
@@ -85,12 +88,6 @@
         echo "<h3>Neighbourhood Description</h3>";
         echo "<p>".$row["neighborhood_description"]."</p>";
         echo "<br>";
-
-        // //PICTURE URL
-        // //TODO: something with this to display it
-        // echo "<h3>Picture URL</h3>";
-        // echo "<p><a href=\"".$row["picture_url"]."\">Click Here</a></p>";
-        // echo "<br>";
 
         //LOCATION COORDINATES
         echo "<h3>Lat and Long</h3>";
@@ -154,6 +151,46 @@
     }
 
     $stmt->free_result();
+
+    $host_query = "SELECT * FROM hosts WHERE hosts.host_id = ?";
+    $stmt = $db->prepare($host_query);
+
+    //check for query error
+    if(!$stmt) {
+        die("Error is:".$db->error);
+    }
+
+    $stmt->bind_param('s',$host_id);
+    $stmt->execute();
+    $search_result = $stmt->get_result();
+
+    if (!empty($msg) ) {
+        echo "<p>$msg</p><br>\n";
+    }
+
+    //start the table of details
+    if($search_result->fetch_row() != 0) {
+
+        //has to go back to the first of the array
+        $search_result->data_seek(0);
+        while($row = $search_result->fetch_assoc()) {
+
+        //IMAGE
+        echo "<img class=\"thumb-img\" src=\"".$row["host_thumbnail_url"]."\">";
+        echo "<p>Airbnb Host: <a href=\"host.php?id=".$row["host_id"]."\">".$row["host_name"]."</a></p>";
+        echo "<br>";
+        }
+    }
+        
+    //if the table cannot be generated
+    else  {
+        echo "<p>The entry cannot be found.</p>";
+    }
+
+    $stmt->free_result();
+
+
+    //////
 
     //if the product is not in the watchlist, else if there is a message to display, else if the user is logged in
     if(!is_in_watchlist($code) ) {

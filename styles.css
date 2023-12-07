@@ -160,3 +160,7 @@ textarea {
     margin-left: auto;
     margin-right: auto;
 }
+
+.thumb-img {
+    width: 10%;
+}
