@@ -71,6 +71,11 @@
         echo "<p><a href=\"".$row["listing_url"]."\">Click Here</a></p>";
         echo "<br>";
 
+        //HOST ID
+        echo "<h3>Host ID</h3>";
+        echo "<p><a href=\"host.php?id=".$row["host_id"]."\">".$row["host_id"]."</a></p>";
+        echo "<br>";
+
         //DESCRIPTION
         echo "<h3>Description</h3>";
         echo "<p>".$row["description"]."</p>";

@@ -37,66 +37,16 @@
 
         unset($_SESSION["neighbourhood_preference"]);
         $_SESSION["neighbourhood_preference"] = $_POST["neighbourhood_preference"];
-        // $message = "Your changes have been saved.";
 
         header("Location: profile.php");
     }
 
 
-//
-    // $profile_query = "SELECT first_name, last_name, email, neighbourhood_preference FROM users WHERE username = ?";
-    // $stmt = $db->prepare($profile_query);
-
-    //check for query error
-    // if(!$stmt) {
-    //     die("Error is:".$db->error);
-    // }
-
-    // $stmt->bind_param('s',$_SESSION["valid_user"]);
-    // $stmt->execute();
-    // $search_result = $stmt->get_result();
-
-    // if (!empty($msg) ) {
-    //     echo "<p>$msg</p>\n";
-    // }
-
-    //start the table of details
-    // if($search_result->fetch_row() != 0) {
-
-    //     //has to go back to the first of the array
-    //     $search_result->data_seek(0);
-
-    //     while($row = $search_result->fetch_assoc()) {
-
-    //     $firstName = $row["first_name"];
-    //     $lastName = $row["last_name"];
-    //     $email = $row["email"];
-    //     $neighbourhoodPreference = $row["neighbourhood_preference"];
-    //     }
-    // }
-
-    // else  {
-    //     echo "<p>The information could not be displayed.</p><br>";
-    // }
-
-    // $stmt->free_result();
-
     ?>
 
 <div class="page-content, text-center">
     <form action="edit.php" method="post">
-        <!-- First Name:<br />
-        <input type="text" name="first_name" value="$firstName" required /><br><br>
-        Last Name:<br />
-        <input type="text" name="last_name" value="" required /><br><br>
-        Email:<br />
-        <input type="text" name="email" value="" required /><br><br>
-        Username:<br />
-        <input type="text" name="username" value="" required /><br><br>
-        Password:<br />
-        <input type="password" name="password" value="" required /><br><br>
-        Confirm Password:<br />
-        <input type="password" name="password_confirm" value="" required /><br><br> -->
+    
         Neighbourhood Preference<br />
 
         <select id="neighbourhood_preference" name="neighbourhood_preference">
@@ -123,10 +73,6 @@
 </div>
 
     <?php
-
-    // echo "<button class=\"main-button margin-top\"><a href=\"edit.php\">Change Your Preferences</a></button>";
-
-    ///////
 
     echo "</div>";
 

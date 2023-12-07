@@ -154,3 +154,9 @@ textarea {
 .listing-img {
     width: 100%;
 }
+
+.host-img {
+    width: 25%;
+    margin-left: auto;
+    margin-right: auto;
+}

@@ -1,16 +1,6 @@
 <?php
     require_once("private/initialize.php");
 
-    // $query = "SELECT listings.name, listings.neighbourhood FROM listings ORDER BY listings.neighbourhood ASC LIMIT 50";
-    // $result = $db->query($query);
-    // $row = $result->fetch_assoc();
-    
-    // //if there is no result, throw the error
-    // if(!$result) {
-    //     echo $db->error;
-    //     exit();
-    // }
-
 //query to display the dropdown of order numbers properly
 $neighbourhood_query = "SELECT neighbourhood FROM listings GROUP BY neighbourhood ASC";
 $neighbourhood_result = $db->query($neighbourhood_query);
@@ -125,11 +115,6 @@ if(isset($_POST['neighbourhood']) || isset($_POST['startDate']) || isset($_POST[
         //PREPARING THE QUERY
         //if there is a query selected, order number must be selected for the query to generate properly
         if(isset($_POST['neighbourhood']) || isset($_POST['startDate']) || isset($_POST['endDate'])) {
-            
-            // if(!isset($_POST['orderNum'])) {
-            //     echo "The column \"Order Number\" is mandatory for the results to run properly. Please try again.";
-            //     exit();
-            // }
 
             $stmt = $db->prepare($query);
 
@@ -162,23 +147,6 @@ if(isset($_POST['neighbourhood']) || isset($_POST['startDate']) || isset($_POST[
 
             //START THE TABLE
             if($search_result->fetch_row() !=0) {
-                // delete later
-                // echo "<br>";
-                // echo "<h4>SQL Query: </h4>";
-                // echo "<p>".$show_query."</p>";
-                //------
-
-                // echo "<h2>Result</h2>";
-
-                //table headings
-                // echo "<table>
-                // <tr>";
-
-                //     echo "<td><b>Name</b></td>";
-                //     echo "<td><b>Neighbourhood</b></td>";
-                //     echo "<td><b>Price</b></td>";
-
-                // "</tr>";
 
                 table_header();
 
