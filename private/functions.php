@@ -79,4 +79,5 @@
   function table_end() {
     echo "</table>";
   }
-?>
+
+  ?>

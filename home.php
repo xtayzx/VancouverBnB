@@ -1,6 +1,23 @@
 <?php
     require_once("private/initialize.php");
 
+    // $start = 0;
+    // $rows_per_page = 20;
+
+    // $records = "SELECT listings.id, listings.name, listings.neighbourhood, listings.price, listings.review_scores_rating, listings.picture_url FROM listings";
+    // $records_result = $db->query($records);
+    // // $records_row = $records_result->fetch_assoc();
+    
+    // $nr_of_rows = $records_result->num_rows;
+    // $pages = ceil($nr_of_rows /$rows_per_page);
+
+    // if(isset($_GET['page-nr'])) {
+    //     $page = $_GET['page-nr'] - 1;
+    //     $start = $page * $rows_per_page;
+    // }
+
+    // $records_result->free_result();
+
     if(is_logged_in() && isset($_SESSION["neighbourhood_preference"])) {
         //displaying the query on the page with the filled values (which will be added to the string later)
         $display_query = "SELECT listings.id, listings.name, listings.neighbourhood, listings.price, listings.picture_url";
@@ -20,16 +37,25 @@
 
         //creating the prepared statement
         //TODO: How to pagenate the query rather than just having 50
-        $query = $display_query.$str_from.$str_where." GROUP BY listings.id ASC LIMIT 20";
-    }     
-
+        $query = $display_query.$str_from.$str_where." GROUP BY listings.id ASC LIMIT 20"; 
+    }
+    
     $page_title = "Welcome";
     no_SSL();
     require("header.php");
 
+    // if(isset($_GET['page-nr'])) {
+    //     $id = $_GET['page-nr'];
+    // }
+    // else {
+    //     $id = 1;
+    // }
+
             if(is_logged_in()) {
                 echo "<h3>Here are some recommendations in your preferred neighbourhood!</h3><br>";
             }
+
+            // echo "<div id=$id>";
 
             $stmt = $db->prepare($query);
 
@@ -73,7 +99,13 @@
                 echo "<p>The entry cannot be found</p>";
             }
 
+            // echo "</div>";
+            
             $stmt->free_result();
+            ?>
+
+
+<?php
 
     $db->close();
     include_once("footer.php");

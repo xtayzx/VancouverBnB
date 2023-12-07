@@ -1,6 +1,23 @@
 <?php
     require_once("private/initialize.php");
 
+    // $start = 0;
+    // $rows_per_page = 20;
+
+    // $records = "SELECT listings.id, listings.name, listings.neighbourhood, listings.price, listings.picture_url FROM listings";
+    // $records_result = $db->query($records);
+    // // $records_row = $records_result->fetch_assoc();
+    
+    // $nr_of_rows = $records_result->num_rows;
+    // $pages = ceil($nr_of_rows /$rows_per_page);
+
+    // if(isset($_GET['page-nr'])) {
+    //     $page = $_GET['page-nr'] - 1;
+    //     $start = $page * $rows_per_page;
+    // }
+
+    // $records_result->free_result();
+
 //query to display the dropdown of order numbers properly
 $neighbourhood_query = "SELECT neighbourhood FROM listings GROUP BY neighbourhood ASC";
 $neighbourhood_result = $db->query($neighbourhood_query);
@@ -60,10 +77,12 @@ if(isset($_POST['neighbourhood']) || isset($_POST['startDate']) || isset($_POST[
     
     if(isset($_POST["sort"])) {
         if($_POST["sort"] == "Price") {
+            // $group_by = " GROUP BY listings.price ASC LIMIT $start, $rows_per_page";
             $group_by = " GROUP BY listings.price ASC LIMIT 50";
         }
 
         else if($_POST["sort"] == "ID") {
+            // $group_by = " GROUP BY listings.id ASC LIMIT $start, $rows_per_page";
             $group_by = " GROUP BY listings.id ASC LIMIT 50";
         }
     }
@@ -73,7 +92,6 @@ if(isset($_POST['neighbourhood']) || isset($_POST['startDate']) || isset($_POST[
 
     //creating the prepared statement
     //TODO: How to pagenate the query rather than just having 50
-    // $query = $display_query.$str_from.$str_where." GROUP BY listings.id ASC LIMIT 50";
     $query = $display_query.$str_from.$str_where.$group_by;
 }
 
@@ -81,6 +99,12 @@ if(isset($_POST['neighbourhood']) || isset($_POST['startDate']) || isset($_POST[
     no_SSL();
     require("header.php");
     
+    // if(isset($_GET['page-nr'])) {
+    //     $id = $_GET['page-nr'];
+    // }
+    // else {
+    //     $id = 1;
+    // }
 ?>
 
 <form method="post">
@@ -146,23 +170,31 @@ if(isset($_POST['neighbourhood']) || isset($_POST['startDate']) || isset($_POST[
             //for the order number, insert 1 variable
             if (isset($_POST['neighbourhood']) && empty($_POST['startDate']) && empty($_POST['endDate'])){
                 $stmt->bind_param('s', $neighbourhood);
-                $show_query = $display_query.$str_from." WHERE listings.neighbourhood = ".$neighbourhood;
+                // $show_query = $display_query.$str_from." WHERE listings.neighbourhood = ".$neighbourhood;
             }
 
             //TODO: if only the neighbourhood is set - then how many to display
             else if(empty($_POST['neighbourhood']) && isset($_POST['startDate']) && isset($_POST['endDate'])) {
                 $stmt->bind_param('ss', $startDate, $endDate);
-                $show_query = $display_query.$str_from." WHERE calendar.date >= ".$startDate." AND calendar.date <= ".$endDate;
+                // $show_query = $display_query.$str_from." WHERE calendar.date >= ".$startDate." AND calendar.date <= ".$endDate;
             }
 
             //for the date range, insert 2 variables
             else if(isset($_POST['neighbourhood']) && isset($_POST['startDate']) && isset($_POST['endDate'])) {
                 $stmt->bind_param('sss', $neighbourhood, $startDate, $endDate);
-                $show_query = $display_query.$str_from." WHERE listings.neighbourhood = ".$neighbourhood." AND calendar.date >= ".$startDate." AND calendar.date <= ".$endDate;
+                // $show_query = $display_query.$str_from." WHERE listings.neighbourhood = ".$neighbourhood." AND calendar.date >= ".$startDate." AND calendar.date <= ".$endDate;
             }
 
             $stmt->execute();
-            $search_result = $stmt->get_result();            
+            $search_result = $stmt->get_result(); 
+
+            $stmt->free_result();
+        }
+
+
+        if(isset($_POST['neighbourhood']) || isset($_POST['startDate']) || isset($_POST['endDate']) || isset($_GET['page-nr'])) {
+            
+            // echo "<div id=$id>";
 
             //START THE TABLE
             if($search_result->fetch_row() !=0) {
@@ -176,14 +208,54 @@ if(isset($_POST['neighbourhood']) || isset($_POST['startDate']) || isset($_POST[
                 }
 
                 table_end();
+                
+                //PAGINATION
+                // echo "<div class=\"pagination\">";
+                // echo "<a href=\"?page-nr=1\">First</a>";
+                //         if(isset($_GET['page-nr']) && $_GET['page-nr'] > 1) {
+                //             echo "<a href=\"".$_GET['page-nr']."-1\">Previous</a>";
+                //         }
+            
+                //         else {
+                //             echo "<a>Previous</a>";
+                //         }
+            
+                //         echo "<div class=\"page-numbers\">";
+                //             for($counter = 1; $counter <= $pages; $counter++) {
+
+                //                 if($counter <= 10) {
+                //                     echo "<a href=\"?page-nr=$counter\">$counter</a>";
+                //                 } 
+                                
+                //                 // else if($counter == $pages) {
+                //                 //     echo "<a href=\"?page-nr=$counter\">$counter</a>";
+                //                 // }
+                //             }
+                //        echo "</div>";
+            
+                //         if(isset($_GET['page-nr'])) {
+                //             echo "<a href=\"".$_GET['page-nr']."=2\">Next</a>";
+                //         }
+            
+                //         else if($_GET['page-nr'] >= $pages){
+                //             echo "<a>Next</a>";
+                //         }
+            
+                //         else {
+                //             echo "<a href=\"?page-nr=".$_GET['page-nr']."+1>Next</a>";
+                //         }
+                    // echo "<a href=\"?page-nr=$pages\">Last</a>";
+                // echo "</div>";
             }
           
             else  {
                 echo "<p>The entry cannot be found</p>";
             }
-
-            $stmt->free_result();
+            
+            // echo "</div>";
         }
+
+   
     $db->close();
     include_once("footer.php");
 ?>
