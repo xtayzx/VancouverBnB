@@ -105,7 +105,7 @@
                 start_cards_container(); // Start the cards container
                 
                 while ($row = $search_result->fetch_assoc()) {
-                    if ($count % 4 == 0) {
+                    if ($count % 5 == 0) {
                         echo '<div class="card-row">'; // Start a new row for every fourth card
                     }
             
@@ -114,13 +114,13 @@
                     
                     $count++;
                     
-                    if ($count % 4 == 0) {
+                    if ($count % 5 == 0) {
                         echo '</div>'; // Close the row after every fourth card
                     }
                 }
             
                 // Check if the last row is incomplete and close it
-                if ($count % 4 !== 0) {
+                if ($count % 5 !== 0) {
                     echo '</div>';
                 }
             
