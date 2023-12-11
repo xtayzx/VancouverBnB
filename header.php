@@ -34,26 +34,22 @@ if(!isset($page_title)) {
                     echo "<a href=\"login.php\">Login</a>";
                 ?>
             </div>
+
             <div class="user-profile">
                 <strong>
                     <p class="user-text">User:
-                        <?php
-
-                        //check for if session is set, if is, display the username
-                        echo $_SESSION['valid_user'] ?? '';
-                        ?>
+                        <?php echo $_SESSION['valid_user'] ?? ''; ?>
                     </p>
-
                 </strong>
                 <div class="user-profile-img">
-                    <a href="profile.php"><img src="image/profile.png" width = 40 height = auto></a>
+                    <a href="profile.php">
+                        <img src="image/profile.png" width="40" height="auto" style="width: 40px; height: auto;">
+                    </a>
                 </div>
             </div>
-
         </div>
-    </div>
 
-    <!-- set the page title -->
-    <h2>
-        <?php echo $page_title ?>
-    </h2>
+        <!-- set the page title -->
+        <h2>
+            <?php echo $page_title ?>
+        </h2>
