@@ -1,5 +1,7 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:opsz,wght@6..12,200;6..12,300;6..12,400;6..12,500;6..12,600;6..12,700;6..12,800&display=swap');
+
 * {
-    font-family: Georgia, 'Times New Roman', Times, serif;
+    font-family: 'Nunito Sans', sans-serif;
     margin: 0;
 }
 
@@ -14,70 +16,96 @@ h1 {
 h2 {
     text-align: center;
     margin-top: 5vh;
-    margin-bottom: 3vh; 
+    margin-bottom: 3vh;
 }
 
 
 /* Headings in the Model Details page */
 h3 {
     color: #000000;
-    text-decoration: none;  
+    text-decoration: none;
 }
 
 /* Links in the Watchlist */
 ul li a {
     color: #02589e;
-    text-decoration: underline;    
+    text-decoration: underline;
 }
 
 /* HEADER  */
 .header-size {
     width: 100%;
-    border-spacing: 0px;
 }
 
-.header-background {
-    height: 160px;
-    background-color:#b40b0b;
+.header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 100%;
+    margin: 0 auto;
+    padding: 0 50px;
+    box-shadow: 0 4px 5px rgba(0, 0, 0, 0.1); 
+
 }
 
 .header-title {
-    font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
-    font-size: 66px;
-    color: white;
-    text-align: center;
+    font-size: 25px;
+    /* text-align: left; */
+    padding-top: 2rem;
+    padding-bottom: 1.5rem;
+    font-weight: 700;
+    kerning: auto;
+    display: flex;
+    align-items: center;
+
+}
+
+.user-profile {
+    display: flex;
+    align-items: center;
+    padding-bottom: 1.5rem;
+}
+
+.user-profile-img {
+    margin-top: 2.3rem;
 }
 
 .user-text {
-    color: #f8d5d5;
-    margin: 0 0 0.5em 0;
-}
+    color: #101111;
+    margin-right: 1rem;
+    /* Add margin between User and links */
+    padding-top: 1rem;
+    margin-top: 1rem;
 
-.menu-size {
-    height: 120px;
-    background-color: rgb(73, 34, 34);
 }
 
 .menu-font {
-    font-size:24px;
-    color:white;
-    text-align:center;
+    display: flex;
+    padding-top: 1rem;
+    padding-bottom: 1.5rem;
+    justify-content: center;
+    align-items: center;
+    margin-top: 1rem;
+    /* Adjust top margin as needed */
 }
 
-.menu-font a, .menu-font a:visited {
-    color: #FFFFFF;
+.menu-font a {
+    color: #101111;
     text-decoration: none;
+    margin: 0 1rem;
+    /* Add horizontal margin between links */
 }
 
 .menu-font a:hover {
-    color:#ff7f7f;
+    color: #BAF3ED;
+    transition: 0.35s;
 }
 
 /* HOME PAGE */
 .table-header {
-    text-align:center;
-    width:300px;
-    height:50px;
+    text-align: center;
+    width: 300px;
+    height: 50px;
 }
 
 .table-contents {
@@ -86,40 +114,40 @@ ul li a {
 }
 
 .table-contents a {
-    color:#02589e;
+    color: #02589e;
     text-decoration: none;
 }
 
-.table-contents a:hover, .main-button a:hover{
+.table-contents a:hover, .main-button a:hover {
     text-decoration: underline;
-} 
+}
 
 /* FOOTER */
 
 .footer {
     width: 100%;
-    border-spacing:0px;
+    border-spacing: 0px;
 }
 
 .footer-cell {
-    height:100px;
-    background-color:#000000;
-    font-size:16px;
-    color:white;
-    text-align:center;
+    height: 100px;
+    background-color: #000000;
+    font-size: 16px;
+    color: white;
+    text-align: center;
 }
 
 /* GENERAL */
 .form-center {
     width: 375px;
     margin: 0 auto;
- }
+}
 
- /* MAIN WIDTH TABLE */
+/* MAIN WIDTH TABLE */
 .main-table {
     width: 750px;
     margin: 0 auto;
- }
+}
 
 .page-content {
     text-align: left;
@@ -131,9 +159,9 @@ ul li a {
 }
 
 /* BUTTON */
-.main-button, .main-button a, .main-button a:visited{
+.main-button, .main-button a, .main-button a:visited {
     background-color: #02589e;
-    color:#FFFFFF;
+    color: #FFFFFF;
     text-decoration: none;
     margin-bottom: 2em;
 }
