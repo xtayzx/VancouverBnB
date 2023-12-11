@@ -29,7 +29,6 @@ h3 {
 /* Links in the Watchlist */
 ul li a {
     color: #02589e;
-    text-decoration: underline;
 }
 
 /* HEADER  */
@@ -133,26 +132,45 @@ ul li a {
     text-decoration: underline;
 }
 
+.card-container {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    padding: 5px;
+}
+
 .card {
+    width: calc(25% - 10px); /* Adjust the width and margin to fit four cards in a row */
+    margin-bottom: 20px;
+    box-sizing: border-box;
     border: 1px solid #ccc;
     border-radius: 5px;
     padding: 10px;
-    margin: 10px;
-    width: 300px; /* Adjust width as needed */
+    margin: 1px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Optional: Add a drop shadow */
 }
+
+.card-row {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin-bottom: 20px; /* Adjust margin as needed */
+}
+
 
 /* Style for the image inside the card */
 .card img {
     width: 100%;
-    height: auto;
-    border-radius: 5px 5px 0 0; /* Optional: Rounded corners for top */
+    height: 400px;
+    object-fit: cover; /* Maintain aspect ratio and cover the entire area */
+    border-radius: 5px 5px 0 0; /* Optional: Add border radius */
 }
 
 /* Style for headings and other text in the card */
 .card h2,
 .card p {
     margin: 5px 0;
+    text-align: left;
 }
 
 /* Optional: Hover effect for the card */

@@ -82,21 +82,51 @@
             $search_result = $stmt->get_result();            
 
             //START THE TABLE
-            if($search_result->fetch_row() !=0) {
+            // if($search_result->fetch_row() !=0) {
 
-                table_header();
+            //     table_header();
 
-                //create the table rows
-                while($row = $search_result->fetch_assoc()) {
+            //     //create the table rows
+            //     while($row = $search_result->fetch_assoc()) {
 
-                    table_contents($row['id'], $row['picture_url'], $row['name'], $row['neighbourhood'], $row['price']);
-                }
+            //         table_contents($row['id'], $row['picture_url'], $row['name'], $row['neighbourhood'], $row['price']);
+            //     }
 
-                table_end();
-            }
+            //     table_end();
+            // }
           
-            else  {
-                echo "<p>The entry cannot be found</p>";
+            // else  {
+            //     echo "<p>The entry cannot be found</p>";
+            // }
+
+            if ($search_result->num_rows > 0) {
+                $count = 0; // Counter for tracking cards in a row
+                
+                start_cards_container(); // Start the cards container
+                
+                while ($row = $search_result->fetch_assoc()) {
+                    if ($count % 4 == 0) {
+                        echo '<div class="card-row">'; // Start a new row for every fourth card
+                    }
+            
+                    // Display each listing as a card
+                    display_listing_card($row['id'], $row['picture_url'], $row['name'], $row['neighbourhood'], $row['price']);
+                    
+                    $count++;
+                    
+                    if ($count % 4 == 0) {
+                        echo '</div>'; // Close the row after every fourth card
+                    }
+                }
+            
+                // Check if the last row is incomplete and close it
+                if ($count % 4 !== 0) {
+                    echo '</div>';
+                }
+            
+                end_cards_container(); // End of cards container
+            } else {
+                echo "<p>No listings found.</p>";
             }
 
             // echo "</div>";
