@@ -318,6 +318,74 @@ select{
    text-align: center; 
 }
 
+/* LOGIN PAGE */
+
+.user-login{
+    font-size: 50px;
+}
+.login{
+    text-align: center;
+    text-align: center;
+    margin: 15vh 30vw 15vh 30vw;
+
+    padding-bottom: 5rem;
+    border: 1px solid #ccc;
+    border-radius: 15px;
+}
+
+.login-username {
+    width: 50%;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    padding: 8px;
+    margin-top: 1rem;
+}
+
+.login-password {
+    width: 50%;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    padding: 8px;
+    margin-bottom: 1.5rem;
+}
+
+.submit-login {
+    width: 52%;
+    background-color: #0077b6;
+    color: white;
+    border: none;
+    border-radius: 30px;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    cursor: pointer;
+    transform: all 0.3s ease;
+    margin-top: 10px;
+    margin-bottom: 5px;
+}
+
+.submit-login:hover {
+    background-color: #005691;
+    /* border-radius: 30px; */
+}
+
+.register-button {
+    color: white;
+    border: none;
+    border-radius: 15px;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    cursor: pointer;
+    transform: all 0.3s ease;
+}
+
+
+
 /* GENERAL */
 .form-center {
     width: 375px;
@@ -330,14 +398,7 @@ select{
     margin: 0 auto;
 }
 
-.page-content {
-    text-align: left;
-    margin: 0 30vw 0 30vw;
-}
 
-.text-center {
-    text-align: center;
-}
 
 /* BUTTON */
 .main-button, .main-button a, .main-button a:visited {

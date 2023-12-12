@@ -78,17 +78,16 @@
 ?>
 
 <!-- generate the form -->
-<div class="page-content, text-center">
+<div class="login">
+    <h2 class = "user-login">Login</h2>
     <form action="login.php" method="post" class="text-center">
-        Username:<br />
-        <input type="text" name="username" value="" /><br />
+        <input class = "login-username" type="text" name="username" value="" placeholder="username" /><br />
         <br>
-        Password:<br />
-        <input type="password" name="password" value="" /><br />
-        <input type="submit" class="submit-button"/>
+        <input class = login-password type="password" name="password" value="" placeholder="password"/><br />
+        <input type="submit" class="submit-login" value = "Login">
     </form>
 
-    <button class="main-button"><a href="register.php">Not registered yet? Register here.</a></button>
+    <button class="register-button"><a href="register.php">Not registered yet? Register</a></button>
 </div>
 
 <?php
