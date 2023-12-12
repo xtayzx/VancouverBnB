@@ -23,7 +23,7 @@ h2 {
 
 /* Headings in the Model Details page */
 h3 {
-    color: #000000;
+    color: #1c1c1c;
     text-decoration: none;
 }
 
@@ -38,7 +38,6 @@ ul li a {
 }
 
 .header-container {
-
     position: fixed;
     top: 0;
     left: 0;
@@ -121,6 +120,12 @@ ul li a {
 }
 
 /* HOME PAGE */
+.welcome-title {
+    text-align: left;
+    margin-top: 5rem;
+    margin-left: 110px;
+    margin-bottom: -1px;
+}
 .table-header {
     text-align: center;
     width: 300px;
@@ -205,7 +210,7 @@ ul li a {
 
 /* FOOTER */
 
-.footer table{
+.footer {
     width: 100%;
     border-spacing: 0px;
     background-color: #1C1C1C;
@@ -216,6 +221,101 @@ ul li a {
     background-color: #1C1C1C;
     font-size: 16px;
     text-align: center;
+}
+
+/* LISTINGS PAGE */
+.listings-container {
+    width: 75%;
+    margin: 0 auto;
+    text-align: center;
+    padding-top: 5rem;
+    padding-bottom: 25rem;
+}
+
+
+.listings-title {
+    text-align: left;
+    font-size: 50px;
+}
+.options-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+}
+
+.option {
+    flex: 1;
+    text-align: left;
+}
+
+.option select{
+    border-radius: 15px;
+}
+
+.option label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.option input[type="date"],
+.option select {
+    width: 100%;
+    padding: 8px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+}
+
+.option.date-range {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.option.sort-by {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+    align-items: center;
+}
+
+.option.sort-by label {
+    margin-left: 10px;
+    margin-right: 10px;
+    margin-top: 5px;
+}
+
+.option.sort-by label input[type="radio"] {
+    margin-right: 5px;
+    margin-top: 3px;
+}
+
+.option h3 {
+    margin-right: 30px;
+}
+
+.submit-listing {
+    background-color: #0077b6;
+    color: white;
+    border: none;
+    border-radius: 15px;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    cursor: pointer;
+    transform: all 0.3s ease;
+}
+
+.submit-listing:hover {
+    background-color: #005691;
+    /* border-radius: 30px; */
+}
+
+select{
+   text-align: center; 
 }
 
 /* GENERAL */

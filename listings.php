@@ -1,55 +1,55 @@
 <?php
-    require_once("private/initialize.php");
+require_once("private/initialize.php");
 
-    // $start = 0;
-    // $rows_per_page = 20;
+// $start = 0;
+// $rows_per_page = 20;
 
-    // $records = "SELECT listings.id, listings.name, listings.neighbourhood, listings.price, listings.picture_url FROM listings";
-    // $records_result = $db->query($records);
-    // // $records_row = $records_result->fetch_assoc();
-    
-    // $nr_of_rows = $records_result->num_rows;
-    // $pages = ceil($nr_of_rows /$rows_per_page);
+// $records = "SELECT listings.id, listings.name, listings.neighbourhood, listings.price, listings.picture_url FROM listings";
+// $records_result = $db->query($records);
+// // $records_row = $records_result->fetch_assoc();
 
-    // if(isset($_GET['page-nr'])) {
-    //     $page = $_GET['page-nr'] - 1;
-    //     $start = $page * $rows_per_page;
-    // }
+// $nr_of_rows = $records_result->num_rows;
+// $pages = ceil($nr_of_rows /$rows_per_page);
 
-    // $records_result->free_result();
+// if(isset($_GET['page-nr'])) {
+//     $page = $_GET['page-nr'] - 1;
+//     $start = $page * $rows_per_page;
+// }
+
+// $records_result->free_result();
 
 //query to display the dropdown of order numbers properly
 $neighbourhood_query = "SELECT neighbourhood FROM listings GROUP BY neighbourhood ASC";
 $neighbourhood_result = $db->query($neighbourhood_query);
 $neighbourhood_row = $neighbourhood_result->fetch_assoc();
-    
+
 //if there is no result, throw the error
-if(!$neighbourhood_result) {
+if (!$neighbourhood_result) {
     echo $db->error;
     exit();
 }
 
 //if one of the query options is filled in
-if(isset($_POST['neighbourhood']) || isset($_POST['startDate']) || isset($_POST['endDate'])) {
-        
+if (isset($_POST['neighbourhood']) || isset($_POST['startDate']) || isset($_POST['endDate'])) {
+
     //complete the query by order number
-    if(isset($_POST['neighbourhood']) && empty($_POST['startDate']) && empty($_POST['endDate'])) {
+    if (isset($_POST['neighbourhood']) && empty($_POST['startDate']) && empty($_POST['endDate'])) {
         $neighbourhood = $_POST['neighbourhood'];
-    } 
+    }
 
     //complete query by date range
-    else if(empty($_POST['neighbourhood']) && isset($_POST['startDate']) && isset($_POST['endDate'])) {
+    else if (empty($_POST['neighbourhood']) && isset($_POST['startDate']) && isset($_POST['endDate'])) {
         $startDate = $_POST['startDate'];
         $endDate = $_POST['endDate'];
-    } 
+    }
 
     //complete query by date range
-    else if(isset($_POST['neighbourhood']) && isset($_POST['startDate']) && isset($_POST['endDate'])) {
+    else if (isset($_POST['neighbourhood']) && isset($_POST['startDate']) && isset($_POST['endDate'])) {
         $neighbourhood = $_POST['neighbourhood'];
         $startDate = $_POST['startDate'];
         $endDate = $_POST['endDate'];
-    } 
-    
+    }
+
     //return error if both of the queries are set, the user can only select one or the other
     else {
         echo "Error in the query. Please try again.";
@@ -58,30 +58,28 @@ if(isset($_POST['neighbourhood']) || isset($_POST['startDate']) || isset($_POST[
 
     //ADDING QUERY VALUES STRING
     //by order number
-    if(isset($_POST['neighbourhood']) && empty($_POST['startDate']) && empty($_POST['endDate'])) {
+    if (isset($_POST['neighbourhood']) && empty($_POST['startDate']) && empty($_POST['endDate'])) {
         $str_from = " FROM listings";
         $str_where = " WHERE listings.neighbourhood = ? ";
-    } 
+    }
 
     //by date range
-    else if(empty($_POST['neighbourhood']) && isset($_POST['startDate']) && isset($_POST['endDate'])) {
+    else if (empty($_POST['neighbourhood']) && isset($_POST['startDate']) && isset($_POST['endDate'])) {
         $str_from = " FROM listings, calendar";
         $str_where = " WHERE calendar.date >= ? AND calendar.date <= ? AND calendar.available = \"t\"";
-    }   
+    }
 
     //by neighbourhood and date range
-    else if(isset($_POST['neighbourhood']) && isset($_POST['startDate']) && isset($_POST['endDate'])) {
+    else if (isset($_POST['neighbourhood']) && isset($_POST['startDate']) && isset($_POST['endDate'])) {
         $str_from = " FROM listings, calendar";
         $str_where = " WHERE listings.neighbourhood = ? AND calendar.date >= ? AND calendar.date <= ? AND calendar.available = \"t\"";
-    }         
-    
-    if(isset($_POST["sort"])) {
-        if($_POST["sort"] == "Price") {
+    }
+
+    if (isset($_POST["sort"])) {
+        if ($_POST["sort"] == "Price") {
             // $group_by = " GROUP BY listings.price ASC LIMIT $start, $rows_per_page";
             $group_by = " GROUP BY listings.price ASC LIMIT 50";
-        }
-
-        else if($_POST["sort"] == "ID") {
+        } else if ($_POST["sort"] == "ID") {
             // $group_by = " GROUP BY listings.id ASC LIMIT $start, $rows_per_page";
             $group_by = " GROUP BY listings.id ASC LIMIT 50";
         }
@@ -92,170 +90,169 @@ if(isset($_POST['neighbourhood']) || isset($_POST['startDate']) || isset($_POST[
 
     //creating the prepared statement
     //TODO: How to pagenate the query rather than just having 50
-    $query = $display_query.$str_from.$str_where.$group_by;
+    $query = $display_query . $str_from . $str_where . $group_by;
 }
 
-    $page_title = "Search Listings";
-    no_SSL();
-    require("header.php");
-    
-    // if(isset($_GET['page-nr'])) {
-    //     $id = $_GET['page-nr'];
-    // }
-    // else {
-    //     $id = 1;
-    // }
+$page_title = "Search Listings";
+no_SSL();
+require("header.php");
+
+// if(isset($_GET['page-nr'])) {
+//     $id = $_GET['page-nr'];
+// }
+// else {
+//     $id = 1;
+// }
 ?>
 
-<form method="post">
-            <h3>Search for a Airbnb</h3>
-            <label>Neighbourhood: </label>
-            <select id="neighbourhood" name="neighbourhood">
-            <option value="" selected>---Select Neighbourhood---</option>
 
-            <!-- Display all the order numbers in the database -->
-            <?php
+<form class="listings-container" method="post">
+    <h2 class="listings-title ">Where to?</h2>
+
+    <div class="options-row">
+        <div class="option">
+            <select id="neighbourhood" name="neighbourhood">
+                <option value="" selected> Select Neighbourhood </option>
+
+                <!-- Display all the order numbers in the database -->
+                <?php
                 //if the result is greater than zero
                 if ($neighbourhood_result->fetch_row() > 0) {
 
-                //display all the order numbers - if the selected order number is the same when it generates the dropdown, select that value to view as checked
-                while ($row = $neighbourhood_result->fetch_assoc()) {      
-                    if($neighbourhood === $row['neighbourhood']) {
-                        echo "<option value=\"".$row['neighbourhood']."\" selected>".$row['neighbourhood']."</option>";
-                    }
-                    else echo "<option value=\"".$row['neighbourhood']."\">".$row['neighbourhood']."</option>";
+                    //display all the order numbers - if the selected order number is the same when it generates the dropdown, select that value to view as checked
+                    while ($row = $neighbourhood_result->fetch_assoc()) {
+                        if ($neighbourhood === $row['neighbourhood']) {
+                            echo "<option value=\"" . $row['neighbourhood'] . "\" selected>" . $row['neighbourhood'] . "</option>";
+                        } else
+                            echo "<option value=\"" . $row['neighbourhood'] . "\">" . $row['neighbourhood'] . "</option>";
                     }
                 }
-            ?>
+                ?>
             </select>
+        </div>
 
-            <label>or</label>
-            <br>
-            <br>
-            <label>Vacation Dates (YYYY-MM-DD)</label>
-            <br>
 
-            <!-- the date range of the min and max is in reference to what exists in the database -->
+        <!-- the date range of the min and max is in reference to what exists in the database -->
+        <div class="option date-range">
             <label>From: </label>
-            <input type="date" name="startDate" value="<?php echo $startDate?>" min="2023-10-01" max="2024-03-01">
-            
+            <input type="date" name="startDate" value="<?php echo $startDate ?>" min="2023-10-01" max="2024-03-01">
             <label>To: </label>
-            <input type="date" name="endDate" value="<?php echo $endDate?>" min="2023-10-01" max="2024-03-01">
-            <br>
-            <br>
+            <input type="date" name="endDate" value="<?php echo $endDate ?>" min="2023-10-01" max="2024-03-01">
+        </div>
 
-            <label>Sort By: </label><br>
-            <input type="radio" name="sort" value="ID" checked>
-            <label>ID</label><br>
-            <input type="radio" name="sort" value="Price">
-            <label>Price</label>
-            <br>
-            <br>
-            <input type="submit" id="submit" value="Search Listings"/>
-        </form>
+        <input class = "submit-listing" type="submit" id="submit" value="Search Listings" />
 
-        <?php
-        //PREPARING THE QUERY
-        //if there is a query selected, order number must be selected for the query to generate properly
-        if(isset($_POST['neighbourhood']) || isset($_POST['startDate']) || isset($_POST['endDate'])) {
+    </div>
+    <div class="option sort-by">
+        <h3>Sort By: </h3>
+        <input type="radio" name="sort" value="ID" checked>
+        <label>Name</label>
+        <input type="radio" name="sort" value="Price">
+        <label>Price</label>
+    </div>
+</form>
 
-            $stmt = $db->prepare($query);
 
-            //check for query error
-            if(!$stmt) {
-                die("Error is:".$db->error);
-            }
+<?php
+//PREPARING THE QUERY
+//if there is a query selected, order number must be selected for the query to generate properly
+if (isset($_POST['neighbourhood']) || isset($_POST['startDate']) || isset($_POST['endDate'])) {
 
-            //BIND VALUES
-            //for the order number, insert 1 variable
-            if (isset($_POST['neighbourhood']) && empty($_POST['startDate']) && empty($_POST['endDate'])){
-                $stmt->bind_param('s', $neighbourhood);
-                // $show_query = $display_query.$str_from." WHERE listings.neighbourhood = ".$neighbourhood;
-            }
+    $stmt = $db->prepare($query);
 
-            //TODO: if only the neighbourhood is set - then how many to display
-            else if(empty($_POST['neighbourhood']) && isset($_POST['startDate']) && isset($_POST['endDate'])) {
-                $stmt->bind_param('ss', $startDate, $endDate);
-                // $show_query = $display_query.$str_from." WHERE calendar.date >= ".$startDate." AND calendar.date <= ".$endDate;
-            }
+    //check for query error
+    if (!$stmt) {
+        die("Error is:" . $db->error);
+    }
 
-            //for the date range, insert 2 variables
-            else if(isset($_POST['neighbourhood']) && isset($_POST['startDate']) && isset($_POST['endDate'])) {
-                $stmt->bind_param('sss', $neighbourhood, $startDate, $endDate);
-                // $show_query = $display_query.$str_from." WHERE listings.neighbourhood = ".$neighbourhood." AND calendar.date >= ".$startDate." AND calendar.date <= ".$endDate;
-            }
+    //BIND VALUES
+    //for the order number, insert 1 variable
+    if (isset($_POST['neighbourhood']) && empty($_POST['startDate']) && empty($_POST['endDate'])) {
+        $stmt->bind_param('s', $neighbourhood);
+        // $show_query = $display_query.$str_from." WHERE listings.neighbourhood = ".$neighbourhood;
+    }
 
-            $stmt->execute();
-            $search_result = $stmt->get_result(); 
+    //TODO: if only the neighbourhood is set - then how many to display
+    else if (empty($_POST['neighbourhood']) && isset($_POST['startDate']) && isset($_POST['endDate'])) {
+        $stmt->bind_param('ss', $startDate, $endDate);
+        // $show_query = $display_query.$str_from." WHERE calendar.date >= ".$startDate." AND calendar.date <= ".$endDate;
+    }
 
-            $stmt->free_result();
+    //for the date range, insert 2 variables
+    else if (isset($_POST['neighbourhood']) && isset($_POST['startDate']) && isset($_POST['endDate'])) {
+        $stmt->bind_param('sss', $neighbourhood, $startDate, $endDate);
+        // $show_query = $display_query.$str_from." WHERE listings.neighbourhood = ".$neighbourhood." AND calendar.date >= ".$startDate." AND calendar.date <= ".$endDate;
+    }
+
+    $stmt->execute();
+    $search_result = $stmt->get_result();
+
+    $stmt->free_result();
+}
+
+
+if (isset($_POST['neighbourhood']) || isset($_POST['startDate']) || isset($_POST['endDate']) || isset($_GET['page-nr'])) {
+
+    // echo "<div id=$id>";
+
+    //START THE TABLE
+    if ($search_result->fetch_row() != 0) {
+
+        table_header();
+
+        //create the table rows
+        while ($row = $search_result->fetch_assoc()) {
+
+            table_contents($row['id'], $row['picture_url'], $row['name'], $row['neighbourhood'], $row['price']);
         }
 
+        table_end();
 
-        if(isset($_POST['neighbourhood']) || isset($_POST['startDate']) || isset($_POST['endDate']) || isset($_GET['page-nr'])) {
-            
-            // echo "<div id=$id>";
+        //PAGINATION
+        // echo "<div class=\"pagination\">";
+        // echo "<a href=\"?page-nr=1\">First</a>";
+        //         if(isset($_GET['page-nr']) && $_GET['page-nr'] > 1) {
+        //             echo "<a href=\"".$_GET['page-nr']."-1\">Previous</a>";
+        //         }
 
-            //START THE TABLE
-            if($search_result->fetch_row() !=0) {
+        //         else {
+        //             echo "<a>Previous</a>";
+        //         }
 
-                table_header();
+        //         echo "<div class=\"page-numbers\">";
+        //             for($counter = 1; $counter <= $pages; $counter++) {
 
-                //create the table rows
-                while($row = $search_result->fetch_assoc()) {
+        //                 if($counter <= 10) {
+        //                     echo "<a href=\"?page-nr=$counter\">$counter</a>";
+        //                 } 
 
-                    table_contents($row['id'], $row['picture_url'], $row['name'], $row['neighbourhood'], $row['price']);
-                }
+        //                 // else if($counter == $pages) {
+        //                 //     echo "<a href=\"?page-nr=$counter\">$counter</a>";
+        //                 // }
+        //             }
+        //        echo "</div>";
 
-                table_end();
-                
-                //PAGINATION
-                // echo "<div class=\"pagination\">";
-                // echo "<a href=\"?page-nr=1\">First</a>";
-                //         if(isset($_GET['page-nr']) && $_GET['page-nr'] > 1) {
-                //             echo "<a href=\"".$_GET['page-nr']."-1\">Previous</a>";
-                //         }
-            
-                //         else {
-                //             echo "<a>Previous</a>";
-                //         }
-            
-                //         echo "<div class=\"page-numbers\">";
-                //             for($counter = 1; $counter <= $pages; $counter++) {
+        //         if(isset($_GET['page-nr'])) {
+        //             echo "<a href=\"".$_GET['page-nr']."=2\">Next</a>";
+        //         }
 
-                //                 if($counter <= 10) {
-                //                     echo "<a href=\"?page-nr=$counter\">$counter</a>";
-                //                 } 
-                                
-                //                 // else if($counter == $pages) {
-                //                 //     echo "<a href=\"?page-nr=$counter\">$counter</a>";
-                //                 // }
-                //             }
-                //        echo "</div>";
-            
-                //         if(isset($_GET['page-nr'])) {
-                //             echo "<a href=\"".$_GET['page-nr']."=2\">Next</a>";
-                //         }
-            
-                //         else if($_GET['page-nr'] >= $pages){
-                //             echo "<a>Next</a>";
-                //         }
-            
-                //         else {
-                //             echo "<a href=\"?page-nr=".$_GET['page-nr']."+1>Next</a>";
-                //         }
-                    // echo "<a href=\"?page-nr=$pages\">Last</a>";
-                // echo "</div>";
-            }
-          
-            else  {
-                echo "<p>The entry cannot be found</p>";
-            }
-            
-            // echo "</div>";
-        }
+        //         else if($_GET['page-nr'] >= $pages){
+        //             echo "<a>Next</a>";
+        //         }
 
-   
-    $db->close();
-    include_once("footer.php");
+        //         else {
+        //             echo "<a href=\"?page-nr=".$_GET['page-nr']."+1>Next</a>";
+        //         }
+        // echo "<a href=\"?page-nr=$pages\">Last</a>";
+        // echo "</div>";
+    } else {
+        echo "<p>The entry cannot be found</p>";
+    }
+
+    // echo "</div>";
+}
+
+
+$db->close();
+include_once("footer.php");
 ?>

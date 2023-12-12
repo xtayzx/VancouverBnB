@@ -102,6 +102,7 @@
             if ($search_result->num_rows > 0) {
                 $count = 0; // Counter for tracking cards in a row
                 
+                echo '<h1 class = "welcome-title">Welcome</h1>';
                 start_cards_container(); // Start the cards container
                 
                 while ($row = $search_result->fetch_assoc()) {
