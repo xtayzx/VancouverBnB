@@ -62,15 +62,10 @@
         while($row = $search_result->fetch_assoc()) {
 
         //IMAGE
-        echo "<img class=\"listing-img\" src=\"".$row["picture_url"]."\">";
+        echo "<img class=\"image-container\" src=\"".$row["picture_url"]."\">";
 
         //NAME
         echo "<h2>".$row["name"]."</h2>";
-        echo "<br>";
-
-        //ORIGINAL POSTING
-        echo "<h3>Original Posting</h3>";
-        echo "<p><a href=\"".$row["listing_url"]."\">Click Here</a></p>";
         echo "<br>";
 
         //HOST ID
@@ -138,6 +133,11 @@
         echo "<p>Location: ".$row["review_scores_location"]."</p>";
         echo "<p>Value: ".$row["review_scores_value"]."</p>";
         echo "<p>Reviews Per Month: ".$row["reviews_per_month"]."</p>";
+        echo "<br>";
+
+        //ORIGINAL POSTING
+        echo "<h3>Original Posting</h3>";
+        echo "<p><a href=\"".$row["listing_url"]."\">Click Here</a></p>";
         echo "<br>";
 
         // echo "<div id =”my-map” style = “width:800px; height:600px;”><p>This Map</p></div>";

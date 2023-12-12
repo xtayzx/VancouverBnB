@@ -414,6 +414,23 @@ select{
     margin-top: 0.5rem;
 }
 
+/* LISTINGDETAILS PAGE */
+.image-container {
+    position: fixed; 
+    top: 50%;
+    left: 100px;
+    transform: translateY(-50%);
+    width: 700px;
+    height: auto;
+    border-radius: 20px;
+    box-shadow: 0 10px 5px rgba(0, 0, 0, 0.1);
+
+}
+
+.listing-info {
+
+}
+
 /* GENERAL */
 .form-center {
     width: 375px;
@@ -461,4 +478,5 @@ textarea {
 
 .thumb-img {
     width: 10%;
+    border-radius: 50px;
 }

@@ -1,5 +1,6 @@
 <?php
 require_once("private/initialize.php");
+error_reporting(E_ALL); ini_set('display_errors', 1);
 require_SSL();
 
 if (is_logged_in()) {
@@ -54,7 +55,7 @@ if (is_post_request()) {
                 //on success
                 else {
                     $hash_pass = password_hash($_POST["password"], PASSWORD_DEFAULT);
-                    $sql = "INSERT INTO users (first_name, last_name, email, username, hashed_password, neighbourhoodPreference) 
+                    $sql = "INSERT INTO users (first_name, last_name, email, username, hashed_password, neighbourhood_Preference) 
                     VALUES (?,?,?,?,?,?)";
                     $stmt = mysqli_prepare($db, $sql);
                     mysqli_stmt_bind_param($stmt, "ssssss",
