@@ -87,12 +87,12 @@ function start_cards_container() {
 
 // Function to display each listing as a card
 function display_listing_card($id, $image, $name, $neighbourhood, $price) {
-  echo '<div class="card">';
+  echo '<a href="listingdetails.php?id='.$id.'" class="card">';
   echo '<img class="listing-img" src="'.$image.'" alt="Listing Image">';
-  echo '<h2><a href="listingdetails.php?id='.$id.'">'.$name.'</a></h2>';
+  echo '<h2 class="card-heading">'.$name.'</h2>';
   echo '<p>Neighbourhood: '.$neighbourhood.'</p>';
-  echo '<p>Price: '.$price.'</p>';
-  echo '</div>';
+  echo '<p><strong>Price: '.$price.'</strong></p>';
+  echo '</a>';
 }
 
 // Function to end the cards container

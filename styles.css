@@ -3,6 +3,7 @@
 * {
     font-family: 'Nunito Sans', sans-serif;
     margin: 0;
+    background-color: #FAFAFF;
 }
 
 /* Main title */
@@ -37,6 +38,7 @@ ul li a {
 }
 
 .header-container {
+
     position: fixed;
     top: 0;
     left: 0;
@@ -44,11 +46,10 @@ ul li a {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 0 0  ; /* Adjust padding as needed */
-    background-color: #ffffff; /* Set background color if needed */
+    padding: 0 0;
+    background-color: #FAFAFF;
     box-shadow: 0 4px 5px rgba(0, 0, 0, 0.1);
     z-index: 9999;
-
 }
 
 .header-title {
@@ -56,11 +57,14 @@ ul li a {
     /* text-align: left; */
     padding-top: 2rem;
     padding-left: 2rem;
+    margin-left: 80px;
+    /* margin-right: 100px; */
     padding-bottom: 1.5rem;
     font-weight: 700;
     kerning: auto;
     display: flex;
     align-items: center;
+    color: #284B63;
 
 }
 
@@ -72,15 +76,19 @@ ul li a {
 }
 
 .user-profile-img {
-    margin-top: 2rem; /* Adjust as needed */
+    margin-top: 2rem;
+    /* Adjust as needed */
     margin-left: auto;
+    margin-right: 75px;
 }
 
 .user-profile-img img {
     width: 40px;
     height: auto;
-    display: block; /* Ensures proper rendering */
+    display: block;
+    /* Ensures proper rendering */
 }
+
 .user-text {
     color: #101111;
     margin-right: 1rem;
@@ -136,12 +144,12 @@ ul li a {
 .card-container {
     display: flex;
     flex-wrap: wrap;
-    width: 75%;
-    padding: 15px;
+    width: 65%;
+    padding: 25px;
 }
 
 .card {
-    width: calc(20% - 15px); 
+    width: calc(20% - 15px);
     margin-bottom: 45px;
     box-sizing: border-box;
     /* border: 1px solid #ccc;
@@ -153,15 +161,16 @@ ul li a {
     text-overflow: ellipsis;
     z-index: 1;
     padding-bottom: 1rem;
+    text-decoration: none;
 }
 
 .card-row {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
-    margin-bottom: 20px;
-    margin-left: 25px;
-    margin-right: 25px
+    margin-bottom: 50px;
+    margin-left: 100px;
+    margin-right: 100px
 }
 
 
@@ -170,7 +179,7 @@ ul li a {
     width: 100%;
     height: 300px;
     object-fit: cover;
-    border-radius: 15px 15px 15px 15px; 
+    border-radius: 15px 15px 15px 15px;
 }
 
 /* Style for headings and other text in the card */
@@ -187,24 +196,25 @@ ul li a {
     text-decoration: none;
 }
 
+
 .card:hover {
     /* box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); */
-    transform: scale(1.01);
+    transform: scale(1.05);
     transition: transform 0.3s ease;
 }
 
 /* FOOTER */
 
-.footer {
+.footer table{
     width: 100%;
     border-spacing: 0px;
+    background-color: #1C1C1C;
 }
 
 .footer-cell {
     height: 100px;
-    background-color: #000000;
+    background-color: #1C1C1C;
     font-size: 16px;
-    color: white;
     text-align: center;
 }
 

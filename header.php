@@ -22,7 +22,7 @@ if(!isset($page_title)) {
     <div class="header-size">
 
         <div class="header-container">
-            <div class="header-title" h1>VancouverBnB</div>
+            <div class="header-title" h1>vancouverBnB</div>
 
             <div class="menu-font">
                 <a href="home.php">Home</a> |

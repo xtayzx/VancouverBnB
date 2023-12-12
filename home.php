@@ -106,7 +106,7 @@
                 
                 while ($row = $search_result->fetch_assoc()) {
                     if ($count % 5 == 0) {
-                        echo '<div class="card-row">'; // Start a new row for every fourth card
+                        echo '<div class="card-row">'; // Start a new row for every fifth card
                     }
             
                     // Display each listing as a card
@@ -115,7 +115,7 @@
                     $count++;
                     
                     if ($count % 5 == 0) {
-                        echo '</div>'; // Close the row after every fourth card
+                        echo '</div>'; // Close the row after every fifth card
                     }
                 }
             
