@@ -100,5 +100,26 @@ function end_cards_container() {
   echo '</div>';
 }
 
+//function to generate all the products in the users watchlist
+function model_link($code, $name, $page)
+{
+    echo "<a href=\"$page?id=$code\">$name</a>";
+}
+
+function watchlist_action($code, $name, $page)
+{
+    echo "<a class=\"action\" href=\"$page?id=$code\">$name</a>";
+}
+
+function display_watchlist_card($id, $image, $name, $neighbourhood, $price)
+{
+    echo '<a href="listingdetails.php?id=' . $id . '" class="card">';
+    echo '<img class="listing-img" src="' . $image . '" alt="Listing Image">';
+    echo '<h2 class="card-heading">' . $name . '</h2>';
+    echo '<p>Neighbourhood: ' . $neighbourhood . '</p>';
+    echo '<p><strong>Price: ' . $price . '</strong></p>';
+    echo '</a>';
+}
+
 
 ?>

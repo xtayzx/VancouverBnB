@@ -216,7 +216,7 @@ ul li a {
     width: 100%;
     border-spacing: 0px;
     background-color: #1C1C1C;
-    position:fixed;
+    position: fixed;
     bottom: 0;
     height: 100px;
 }
@@ -229,6 +229,118 @@ ul li a {
 }
 
 /* PROFILE PAGE */
+.profile {
+    text-align: left;
+    justify-content: space-evenly;
+    /* width: 30%; */
+    margin-left: 110px;
+    display: flex;
+}
+
+.profile-card {
+    position: fixed;
+    top: 100px;
+    left: 110px;
+    width: 400px;
+    border-radius: 20px;
+    padding-left: 50px;
+    padding-right: 50px;
+    padding-top: 30px;
+    padding-bottom: 10px;
+    box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.2);
+    z-index: 9998;
+    margin-bottom: 3rem;
+    margin-top: 6rem;
+}
+
+.profile-img {
+    margin-left: auto;
+    margin-right: auto;
+    justify-content: center;
+    display: flex;
+    margin-bottom: 30px;
+}
+
+.edit-profile-button {
+    white-space: nowrap;
+    justify-content: center;
+    text-align: center;
+    width: 52%;
+    background-color: #0077b6;
+    /* color: white; */
+    border: none;
+    border-radius: 30px;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    cursor: pointer;
+    transform: all 0.3s ease;
+    margin-top: 10px;
+    margin-bottom: 30px;
+    margin-left: auto;
+    display: flex;
+    margin-right: auto;
+}
+
+.edit-profile-button a,
+.edit-profile-button button {
+
+    background-color: #0077b6;
+    color: white;
+    border: none;
+    border-radius: 30px;
+    margin-left: auto;
+    margin-right: auto;
+
+}
+
+.edit-profile-button a {
+    text-decoration: none;
+}
+
+.edit-profile-button:hover {
+    background-color: #005691;
+}
+
+.edit-profile-button:hover {
+    background-color: #005691;
+    /* border-radius: 30px; */
+}
+
+.profile-watchlists {
+    font-size: 3rem;
+    /* margin-left: 0px; */
+    margin-top: 100px;
+    white-space: nowrap;
+    background-color: none;
+    z-index: 1;
+}
+
+.profile-watchlist-container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-left: 35rem;
+    margin-right: 3rem;
+}
+
+.watchlist-cards {
+    display: flex;
+    flex-wrap: wrap;
+    text-align: left;
+    justify-content: center;
+    gap: 20px;
+    /* Adjust the gap between cards */
+}
+
+.watchlist-cards .column {
+    width: calc(30% - 20px);
+    /* Adjust card width and gap */
+    margin-bottom: 20px;
+    /* Adjust margin-bottom as needed */
+}
 
 
 /* LISTINGS PAGE */
@@ -585,11 +697,12 @@ select {
 .column {
     flex: 1;
     text-align: left;
-    margin-right: 20px; 
+    margin-right: 20px;
 }
 
 .column:last-child {
-    margin-right: 0; /* Remove margin for the last column */
+    margin-right: 0;
+    /* Remove margin for the last column */
 }
 
 /* GENERAL */
