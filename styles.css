@@ -344,7 +344,7 @@ ul li a {
 
 /* EDIT PROFILE + NEIGHBOURHOOD PREFERENCES */
 
-.edit{
+.edit {
     font-size: 40px;
     text-align: center;
     text-align: center;
@@ -354,7 +354,7 @@ ul li a {
     border-radius: 15px;
 }
 
-.edit-profile-img{
+.edit-profile-img {
     margin-left: auto;
     margin-right: auto;
     justify-content: center;
@@ -366,13 +366,15 @@ ul li a {
 .edit-firstname,
 .edit-lastname,
 #neighbourhood_preference {
-    width: 50%; 
+    width: 50%;
     border-radius: 5px;
     border: 1px solid #ccc;
     padding: 8px;
-    margin-top: 5px; /* Adjust margin as needed */
-    margin-bottom: 10px; /* Add margin at the bottom */
-    box-sizing: border-box; 
+    margin-top: 5px;
+    /* Adjust margin as needed */
+    margin-bottom: 10px;
+    /* Add margin at the bottom */
+    box-sizing: border-box;
 }
 
 
@@ -397,9 +399,9 @@ ul li a {
     border: 1px solid #ccc;
     box-sizing: border-box;
     justify-content: center;
-    margin-left:auto;
+    margin-left: auto;
     margin-right: auto;
-    display:flex;
+    display: flex;
 }
 
 
@@ -410,8 +412,8 @@ ul li a {
 
 .edit h5 {
     text-align: left;
-    display:inline-block;
-    justify-content:f;
+    display: inline-block;
+    justify-content: f;
     font-size: 15px;
     font-weight: 400;
     margin-right: 0.5rem;
@@ -641,10 +643,10 @@ select {
     margin-top: 0.5rem;
 }
 
-/* LISTINGDETAILS PAGE */
+/* LISTING DETAILS PAGE */
 .image-container {
     position: fixed;
-    top: 57%;
+    top: 32rem;
     left: 110px;
     transform: translateY(-50%);
     max-width: 700px;
@@ -662,8 +664,9 @@ select {
 }
 
 .info-column {
-    margin-top: 100px;
+    margin-top: 0.5rem;
     flex: 1;
+    margin-right: 0.5rem;
 }
 
 .listing-info {
@@ -677,11 +680,127 @@ select {
 
 .listing-info h2 {
     text-align: left;
-    /* top: 50%; */
-    left: 110px;
-    position: fixed;
-    font-size: 30px;
+    font-size: 3rem;
+    ;
     background-color: none;
+}
+
+
+.price {
+    margin-top: -1.5rem;
+    font-size: 2rem;
+    font-weight: 600;
+}
+
+.star-ratings-css {
+    /* unicode-bidi: bidi-override; */
+    /* color: #c5c5c5; */
+    font-size: 20px;
+    height: 1em;
+    width: auto;
+    display: inline-block;
+    position: relative;
+    align-items: center;
+    margin-bottom: 3rem;
+    margin-top: 0.25rem;
+}
+
+.star-ratings-css span {
+    color: #1c1c1c;
+}
+
+.star-ratings-css .rating-value {
+    margin-right: 5px;
+    vertical-align: middle;
+}
+
+
+.star-ratings-css .star {
+    display: inline-block;
+    position: relative;
+    overflow: hidden;
+    color: #1c1c1c;
+    /* Color for filled stars */
+    vertical-align: middle;
+}
+
+.star-ratings-css .filled {
+    color: #1c1c1c;
+    /* Color for filled stars */
+}
+
+.star-ratings-css .half-filled {
+    color: #1c1c1c;
+    /* Color for half-filled stars */
+    width: 50%;
+    overflow: hidden;
+}
+
+.star-ratings-css .empty {
+    color: #c5c5c5;
+    /* Color for empty stars */
+}
+
+.comment-textbox {
+    border-radius: 5px;
+    border: 0.5px solid #1c1c1c;
+}
+
+.reviews-graph {
+    margin-bottom: 20px;
+    padding: 10px;
+    font-size:1.5rem;
+    /* background-color: #ddd; */
+}
+
+.bar {
+    margin-bottom: 8px;
+}
+.posting {
+    font-size: 0.75rem;
+    text-align: right;
+    margin-top: -5rem;
+    margin-right: 5rem;
+}
+
+.rating-decimal{
+    margin-left: 0.5rem;
+}
+
+.category {
+    display: inline-block;
+    width: 200px; /* Adjust the width according to your preference */
+    vertical-align: top;
+}
+
+.stars {
+    display: inline-block;
+}
+.star-value {
+    display: inline-block;
+    margin-left: 10px; /* Add margin for spacing between stars and value */
+    vertical-align: top;
+}
+
+.star {
+    color: #ffc107;
+    /* Set default star color to golden */
+}
+
+.empty {
+    color: #ccc;
+    /* Set color for empty stars */
+}
+
+.filled{
+    color: #ffc107;
+    /* Set color for filled and half-filled stars to golden */
+}
+
+.half-filled {
+    color: transparent; /* Make the star transparent */
+    border: 1px solid #ffc107; /* Set border to create an outline */
+    text-shadow: none; /* Remove text shadow if present */
 }
 
 /* HOST PAGE */

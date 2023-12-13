@@ -26,7 +26,7 @@
         $stmt->bind_param('ss',$username,$id);
         $stmt->execute();
                 
-        $message = urlencode("The model has been added to your <a href=\"watchlist.php\">watchlist</a>.");
+        $message = urlencode("The model has been added to your <a href=\"profile.php\">watchlist</a>.");
     }
     
     //fetch the watchlist for the user
