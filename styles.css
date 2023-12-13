@@ -342,6 +342,101 @@ ul li a {
     /* Adjust margin-bottom as needed */
 }
 
+/* EDIT PROFILE + NEIGHBOURHOOD PREFERENCES */
+
+.edit{
+    font-size: 40px;
+    text-align: center;
+    text-align: center;
+    margin: 15vh 30vw 15vh 30vw;
+    padding-bottom: 5rem;
+    border: 1px solid #ccc;
+    border-radius: 15px;
+}
+
+.edit-profile-img{
+    margin-left: auto;
+    margin-right: auto;
+    justify-content: center;
+    display: flex;
+    margin-bottom: 30px;
+    margin-top: 30px;
+}
+
+.edit-firstname,
+.edit-lastname,
+#neighbourhood_preference {
+    width: 50%; 
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    padding: 8px;
+    margin-top: 5px; /* Adjust margin as needed */
+    margin-bottom: 10px; /* Add margin at the bottom */
+    box-sizing: border-box; 
+}
+
+
+.edit-options-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+}
+
+.edit-option {
+    flex: 1;
+    text-align: left;
+}
+
+
+.edit-option input[type="date"],
+.edit-option select {
+    width: 50%;
+    padding: 8px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+    justify-content: center;
+    margin-left:auto;
+    margin-right: auto;
+    display:flex;
+}
+
+
+
+.edit-option h3 {
+    margin-right: 30px;
+}
+
+.edit h5 {
+    text-align: left;
+    display:inline-block;
+    justify-content:f;
+    font-size: 15px;
+    font-weight: 400;
+    margin-right: 0.5rem;
+}
+
+.submit-edits {
+    width: 20%;
+    background-color: #0077b6;
+    color: white;
+    border: none;
+    border-radius: 30px;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    cursor: pointer;
+    transform: all 0.3s ease;
+    margin-top: 10px;
+    margin-bottom: 5px;
+}
+
+.submit-edits:hover {
+    background-color: #005691;
+}
 
 /* LISTINGS PAGE */
 .listings-container {
