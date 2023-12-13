@@ -127,6 +127,7 @@ ul li a {
     margin-bottom: -1px;
 }
 
+
 .table-header {
     text-align: center;
     width: 300px;
@@ -215,6 +216,9 @@ ul li a {
     width: 100%;
     border-spacing: 0px;
     background-color: #1C1C1C;
+    position:fixed;
+    bottom: 0;
+    height: 100px;
 }
 
 .footer-cell {
@@ -224,19 +228,32 @@ ul li a {
     text-align: center;
 }
 
+/* PROFILE PAGE */
+
+
 /* LISTINGS PAGE */
 .listings-container {
     width: 75%;
     margin: 0 auto;
     text-align: center;
     padding-top: 5rem;
-    padding-bottom: 25rem;
+    padding-bottom: 2rem;
 }
 
+.listing-results-title {
+    text-align: center;
+    justify-content: center;
+}
 
 .listings-title {
     text-align: left;
     font-size: 50px;
+}
+
+.listings-no-results {
+    margin-top: 50px;
+    text-align: center;
+    justify-content: center;
 }
 
 .options-row {

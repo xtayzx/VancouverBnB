@@ -140,7 +140,7 @@ require("header.php");
             <input type="date" name="endDate" value="<?php echo $endDate ?>" min="2023-10-01" max="2024-03-01">
         </div>
 
-        <input class = "submit-listing" type="submit" id="submit" value="Search Listings" />
+        <input class="submit-listing" type="submit" id="submit" value="Search Listings" />
 
     </div>
     <div class="option sort-by">
@@ -197,57 +197,77 @@ if (isset($_POST['neighbourhood']) || isset($_POST['startDate']) || isset($_POST
 
     //START THE TABLE
     if ($search_result->fetch_row() != 0) {
-
-        table_header();
+        $count = 0; // Counter for tracking cards in a row
+        echo '<h1 class = "listing-results-title">Your Results</h1>';
+        start_cards_container();
 
         //create the table rows
         while ($row = $search_result->fetch_assoc()) {
 
-            table_contents($row['id'], $row['picture_url'], $row['name'], $row['neighbourhood'], $row['price']);
+            if ($count % 5 == 0) {
+                echo '<div class="card-row">'; // Start a new row for every fifth card
+            }
+
+            // Display each listing as a card
+            display_listing_card($row['id'], $row['picture_url'], $row['name'], $row['neighbourhood'], $row['price']);
+
+            $count++;
+
+            if ($count % 5 == 0) {
+                echo '</div>'; // Close the row after every fifth card
+            }
         }
 
-        table_end();
+        // Check if the last row is incomplete and close it
+        if ($count % 5 !== 0) {
+            echo '</div>';
+        }
 
-        //PAGINATION
-        // echo "<div class=\"pagination\">";
-        // echo "<a href=\"?page-nr=1\">First</a>";
-        //         if(isset($_GET['page-nr']) && $_GET['page-nr'] > 1) {
-        //             echo "<a href=\"".$_GET['page-nr']."-1\">Previous</a>";
-        //         }
-
-        //         else {
-        //             echo "<a>Previous</a>";
-        //         }
-
-        //         echo "<div class=\"page-numbers\">";
-        //             for($counter = 1; $counter <= $pages; $counter++) {
-
-        //                 if($counter <= 10) {
-        //                     echo "<a href=\"?page-nr=$counter\">$counter</a>";
-        //                 } 
-
-        //                 // else if($counter == $pages) {
-        //                 //     echo "<a href=\"?page-nr=$counter\">$counter</a>";
-        //                 // }
-        //             }
-        //        echo "</div>";
-
-        //         if(isset($_GET['page-nr'])) {
-        //             echo "<a href=\"".$_GET['page-nr']."=2\">Next</a>";
-        //         }
-
-        //         else if($_GET['page-nr'] >= $pages){
-        //             echo "<a>Next</a>";
-        //         }
-
-        //         else {
-        //             echo "<a href=\"?page-nr=".$_GET['page-nr']."+1>Next</a>";
-        //         }
-        // echo "<a href=\"?page-nr=$pages\">Last</a>";
-        // echo "</div>";
-    } else {
-        echo "<p>The entry cannot be found</p>";
+        end_cards_container(); // End of cards container
     }
+
+
+
+    //PAGINATION
+    // echo "<div class=\"pagination\">";
+    // echo "<a href=\"?page-nr=1\">First</a>";
+    //         if(isset($_GET['page-nr']) && $_GET['page-nr'] > 1) {
+    //             echo "<a href=\"".$_GET['page-nr']."-1\">Previous</a>";
+    //         }
+
+    //         else {
+    //             echo "<a>Previous</a>";
+    //         }
+
+    //         echo "<div class=\"page-numbers\">";
+    //             for($counter = 1; $counter <= $pages; $counter++) {
+
+    //                 if($counter <= 10) {
+    //                     echo "<a href=\"?page-nr=$counter\">$counter</a>";
+    //                 } 
+
+    //                 // else if($counter == $pages) {
+    //                 //     echo "<a href=\"?page-nr=$counter\">$counter</a>";
+    //                 // }
+    //             }
+    //        echo "</div>";
+
+    //         if(isset($_GET['page-nr'])) {
+    //             echo "<a href=\"".$_GET['page-nr']."=2\">Next</a>";
+    //         }
+
+    //         else if($_GET['page-nr'] >= $pages){
+    //             echo "<a>Next</a>";
+    //         }
+
+    //         else {
+    //             echo "<a href=\"?page-nr=".$_GET['page-nr']."+1>Next</a>";
+    //         }
+    // echo "<a href=\"?page-nr=$pages\">Last</a>";
+    // echo "</div>";
+} else {
+    echo "<p class = \"listings-no-results\">Sorry. We could not find anything that fits your criteria :(</p>";
+
 
     // echo "</div>";
 }
