@@ -417,18 +417,95 @@ select{
 /* LISTINGDETAILS PAGE */
 .image-container {
     position: fixed; 
-    top: 50%;
-    left: 100px;
+    top: 57%;
+    left: 110px;
     transform: translateY(-50%);
-    width: 700px;
-    height: auto;
+    max-width: 700px;
+    max-height: 700px;
+    width: 100%;
+    height: 100%;
     border-radius: 20px;
-    box-shadow: 0 10px 5px rgba(0, 0, 0, 0.1);
+    object-fit: cover;
+    /* box-shadow: 0 10px 5px rgba(0, 0, 0, 0.1); */
+}
 
+.image-column {
+    flex: 0 0 40%;
+    margin-right: 50px;
+}
+
+.info-column {
+    margin-top: 100px;
+    flex: 1;
 }
 
 .listing-info {
+    text-align: left;
+    display: flex;
+    align-items: flex-start;
+    margin-left: 170px;
+    margin-right: auto;
+    width: 90%;
+}
 
+.listing-info h2 {
+    text-align: left;
+    /* top: 50%; */
+    left: 110px;
+    position: fixed;
+    font-size: 30px;
+    background-color: none;
+}
+
+/* HOST PAGE */
+.host-info {
+    display: flex;
+    align-items: center;
+    /* justify-content: center; */
+    text-align: center;
+    margin-left: 20rem;
+    margin-top: 10rem;
+    flex-direction: flex;
+    text-align: center;
+}
+
+.host-img {
+    border-radius: 100%;
+    width: 300px;
+    height: 300px;
+    margin-bottom: 2rem;
+    /* margin-right:20px; */
+}
+
+.host-img-container {
+    margin-bottom: 10px;
+}
+
+.host-details {
+    text-align: left;
+}
+
+.host-details p,
+.host-details a{ 
+    text-align: center;
+    text-decoration: none;
+    font-size: 15px;
+}
+
+.host-details h2{
+    margin: 0;
+    /* margin-bottom: -5px; */
+}
+
+.host-stats {
+    display: flex;
+    justify-content: space-around;
+    text-align: center;
+}
+
+.host-stats .stats{
+    font-size: 1.2em;
+    margin: 5px;
 }
 
 /* GENERAL */
@@ -470,13 +547,8 @@ textarea {
     width: 100%;
 }
 
-.host-img {
-    width: 25%;
-    margin-left: auto;
-    margin-right: auto;
-}
 
 .thumb-img {
     width: 10%;
-    border-radius: 50px;
+    border-radius: 100px;
 }
