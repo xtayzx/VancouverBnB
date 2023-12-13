@@ -62,7 +62,9 @@ if (is_post_request()) {
         $search_result->data_seek(0);
         while ($row = $search_result->fetch_assoc()) {
 
-            echo "<img class=\"host-img\" src=\"" . $row["host_picture_url"] . "\">";
+            // echo "<img class=\"host-img\" src=\"" . $row["host_picture_url"] . "\">";
+
+            $host_id = $row["host_id"];
 
             echo "<div class = \"listing-info\">";
             echo "<div class = \"image-column\">";
@@ -272,7 +274,7 @@ if (is_post_request()) {
     //     echo "<p>The entry cannot be found.</p>";
     // }
 
-    $stmt->free_result();
+    // $stmt->free_result();
 
     $host_query = "SELECT * FROM hosts WHERE hosts.host_id = ?";
     $stmt = $db->prepare($host_query);
