@@ -56,13 +56,13 @@
             }
 
             else {
-                echo "<p>Incorrect password. Please try again.</p>";
+                echo "<p class = \"listings-no-results\">Incorrect password. Please try again.</p>";
             }
         }
     
         //if the table cannot be generated
         else  {
-            echo "<p>Incorrect username or this user does not exist. Please try again.</p>";
+            echo "<p class = \"listings-no-results\">Incorrect username or this user does not exist. Please try again.</p>";
         }
 
         $stmt->free_result();

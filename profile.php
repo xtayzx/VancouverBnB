@@ -100,7 +100,7 @@ if ($search_result->fetch_row() != 0) {
 
     }
 } else {
-    echo "<p>The information could not be displayed.</p><br>";
+    echo "<p class = \"listings-no-results\">The information could not be displayed.</p><br>";
 }
 
 $stmt->free_result();

@@ -314,7 +314,7 @@ if (is_post_request()) {
             echo "</div>"; 
         }
     } else {
-        echo "<p>The entry cannot be found.</p>";
+        echo "<p class = \"listings-no-results\" >The entry cannot be found.</p>";
     }
 
 

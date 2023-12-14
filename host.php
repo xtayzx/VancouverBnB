@@ -113,7 +113,7 @@ if ($search_result->fetch_row() != 0) {
 
 //if the table cannot be generated
 else {
-    echo "<p>The entry cannot be found.</p>";
+    echo "<p class = \"listings-no-results\" >The entry cannot be found.</p>";
 }
 
 $stmt->free_result();
