@@ -231,7 +231,7 @@ if (isset($_POST['neighbourhood']) || isset($_POST['startDate']) || isset($_POST
 
 
 
-echo "<p class = \"listings-no-results\">Sorry. We could not find anything that fits your criteria :(</p>";
+// echo "<p class = \"listings-no-results\">Sorry. We could not find anything that fits your criteria :(</p>";
 
 $db->close();
 include_once("footer.php");
