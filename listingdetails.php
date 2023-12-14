@@ -50,9 +50,7 @@ if (is_post_request()) {
     $stmt->execute();
     $search_result = $stmt->get_result();
 
-    if (!empty($msg)) {
-        echo "<p class = \"listings-no-results\">$msg</p><br>\n";
-    }
+
 
 
     //start the table of details
@@ -68,6 +66,7 @@ if (is_post_request()) {
 
 
             echo "<div class = \"listing-info\">";
+            
             echo "<button class=\"back-to-listings\"><a href=\"listings.php\"> ← Back to All Listings</a></button>";
 
             echo "<div class = \"image-column\">";
@@ -237,9 +236,9 @@ if (is_post_request()) {
             $stmt->execute();
             $search_result = $stmt->get_result();
 
-            if (!empty($msg)) {
-                echo "<p>$msg</p>\n";
-            }
+            // if (!empty($msg)) {
+            //     echo "<p>$msg</p>\n";
+            // }
 
             //start the table of details
             if ($search_result->fetch_row() != 0) {
@@ -296,9 +295,9 @@ if (is_post_request()) {
     $stmt->execute();
     $search_result = $stmt->get_result();
 
-    if (!empty($msg)) {
-        echo "<p>$msg</p><br>\n";
-    }
+    // if (!empty($msg)) {
+    //     echo "<p>$msg</p><br>\n";
+    // }
 
     if ($search_result->fetch_row() != 0) {
         $search_result->data_seek(0);

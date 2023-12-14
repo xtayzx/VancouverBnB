@@ -818,13 +818,14 @@ select {
     margin-left: 850px;
     margin-top: 3rem;
     margin-right: 100px;
-    margin-bottom: 3rem;
+    margin-bottom: 6rem;
 }
 
 .host-info-listingdetails {
     display: flex;
     align-items: center;
     margin-top: 10px; /* Adjust as needed */
+    
 }
 
 .host-info-listingdetails img {

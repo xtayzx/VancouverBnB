@@ -21,8 +21,8 @@ require("header.php");
 
 echo "<div class=\"page-content\">";
 
-if (isset($message))
-    echo "<p>$message</p><br>";
+// if (isset($message))
+//     echo "<p>$message</p><br>";
 
 $profile_query = "SELECT first_name, last_name, email, username, neighbourhood_preference FROM users WHERE username = ?";
 $stmt = $db->prepare($profile_query);
@@ -36,9 +36,9 @@ $stmt->bind_param('s', $_SESSION["valid_user"]);
 $stmt->execute();
 $search_result = $stmt->get_result();
 
-if (!empty($msg)) {
-    echo "<p class = \"listings-no-results\">$msg</p>\n";
-}
+// if (!empty($msg)) {
+//     echo "<p class = \"listings-no-results\">$msg</p>\n";
+// }
 
 //start the table of details
 if ($search_result->fetch_row() != 0) {
