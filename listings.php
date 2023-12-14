@@ -163,6 +163,7 @@ if (isset($_POST['neighbourhood']) || isset($_POST['startDate']) || isset($_POST
     //check for query error
     if (!$stmt) {
         die("Error is:" . $db->error);
+        
     }
 
     //BIND VALUES
@@ -193,7 +194,6 @@ if (isset($_POST['neighbourhood']) || isset($_POST['startDate']) || isset($_POST
 
 if (isset($_POST['neighbourhood']) || isset($_POST['startDate']) || isset($_POST['endDate']) || isset($_GET['page-nr'])) {
 
-    // echo "<div id=$id>";
 
     //START THE TABLE
     if ($search_result->fetch_row() != 0) {
@@ -225,53 +225,13 @@ if (isset($_POST['neighbourhood']) || isset($_POST['startDate']) || isset($_POST
 
         end_cards_container(); // End of cards container
     }
-
-
-
-    //PAGINATION
-    // echo "<div class=\"pagination\">";
-    // echo "<a href=\"?page-nr=1\">First</a>";
-    //         if(isset($_GET['page-nr']) && $_GET['page-nr'] > 1) {
-    //             echo "<a href=\"".$_GET['page-nr']."-1\">Previous</a>";
-    //         }
-
-    //         else {
-    //             echo "<a>Previous</a>";
-    //         }
-
-    //         echo "<div class=\"page-numbers\">";
-    //             for($counter = 1; $counter <= $pages; $counter++) {
-
-    //                 if($counter <= 10) {
-    //                     echo "<a href=\"?page-nr=$counter\">$counter</a>";
-    //                 } 
-
-    //                 // else if($counter == $pages) {
-    //                 //     echo "<a href=\"?page-nr=$counter\">$counter</a>";
-    //                 // }
-    //             }
-    //        echo "</div>";
-
-    //         if(isset($_GET['page-nr'])) {
-    //             echo "<a href=\"".$_GET['page-nr']."=2\">Next</a>";
-    //         }
-
-    //         else if($_GET['page-nr'] >= $pages){
-    //             echo "<a>Next</a>";
-    //         }
-
-    //         else {
-    //             echo "<a href=\"?page-nr=".$_GET['page-nr']."+1>Next</a>";
-    //         }
-    // echo "<a href=\"?page-nr=$pages\">Last</a>";
-    // echo "</div>";
 } else {
-    echo "<p class = \"listings-no-results\">Sorry. We could not find anything that fits your criteria :(</p>";
-
-
-    // echo "</div>";
+    echo "<p></p>";
 }
 
+
+
+echo "<p class = \"listings-no-results\">Sorry. We could not find anything that fits your criteria :(</p>";
 
 $db->close();
 include_once("footer.php");

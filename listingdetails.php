@@ -63,13 +63,16 @@ if (is_post_request()) {
         while ($row = $search_result->fetch_assoc()) {
 
             // echo "<img class=\"host-img\" src=\"" . $row["host_picture_url"] . "\">";
-
+    
             $host_id = $row["host_id"];
 
-            echo "<div class = \"listing-info\">";
-            echo "<div class = \"image-column\">";
 
+            echo "<div class = \"listing-info\">";
+            echo "<button class=\"back-to-listings\"><a href=\"listings.php\"> ← Back to All Listings</a></button>";
+
+            echo "<div class = \"image-column\">";
             //IMAGE
+    
             echo "<img class=\"image-container\" src=\"" . $row["picture_url"] . "\">";
 
 
@@ -79,6 +82,20 @@ if (is_post_request()) {
 
             //NAME
             echo "<h2 class =\"name-title\">" . $row["name"] . "</h2>";
+
+            // ADD TO WATCHLIST
+            if (!is_in_watchlist($code)) {
+                echo "<form action=\"addtowatchlist.php\" method=\"post\">\n";
+                echo "<input type=\"hidden\" name=\"id\" value=$code>\n";
+                echo "<input type=\"submit\" class=\"add-to-watchlist\" value=\"+ Add To Watchlist\">\n";
+                echo "</form>\n";
+            }
+            // else if (!empty($msg) ) {
+            //     echo "<p>$msg</p>\n";
+            // } 
+            else if (is_logged_in()) {
+                echo "<a class =\"added-to-watchlist\" href=\"profile.php\">Added to watchlist</a>.<br><br><br>";
+            }
 
             //PRICE
             // echo "<h3>Price</h3>";
@@ -262,19 +279,10 @@ if (is_post_request()) {
 
             echo "</div>";
             echo "</div>";
-            
 
-            // echo "<div id =”my-map” style = “width:800px; height:600px;”><p>This Map</p></div>";
-    
         }
     }
 
-    //if the table cannot be generated
-    // else {
-    //     echo "<p>The entry cannot be found.</p>";
-    // }
-
-    // $stmt->free_result();
 
     $host_query = "SELECT * FROM hosts WHERE hosts.host_id = ?";
     $stmt = $db->prepare($host_query);
@@ -292,29 +300,18 @@ if (is_post_request()) {
         echo "<p>$msg</p><br>\n";
     }
 
-    //start the table of details
-    // if ($search_result->fetch_row() != 0) {
-
-    //     //has to go back to the first of the array
-    //     $search_result->data_seek(0);
-    //     while ($row = $search_result->fetch_assoc()) {
-
-    //         //IMAGE
-    //         echo "<img class=\"thumb-img\" src=\"" . $row["host_thumbnail_url"] . "\">";
-    //         echo "<p>Airbnb Host: <a href=\"host.php?id=" . $row["host_id"] . "\">" . $row["host_name"] . "</a></p>";
-    //         echo "<br>";
-    //     }
-    // } else {
-    //     echo "<p>The entry cannot be found.</p>";
-    // }
-
     if ($search_result->fetch_row() != 0) {
         $search_result->data_seek(0);
         while ($row = $search_result->fetch_assoc()) {
             // Display the host's thumbnail image and name
+            echo "<div class=\"host-listingdetails\">";
+            echo "<div class=\"host-info-listingdetails\">";
             echo "<img class=\"thumb-img\" src=\"" . $row["host_thumbnail_url"] . "\">";
-            echo "<p>Airbnb Host: <a href=\"host.php?id=" . $row["host_id"] . "\">" . $row["host_name"] . "</a></p>";
-            echo "<br>";
+            echo "<div class=\"host-link\">";
+            echo "<h3>Hosted by <a href=\"host.php?id=" . $row["host_id"] . "\">" . $row["host_name"] . "</a></h3>";
+            echo "</div>"; 
+            echo "</div>"; 
+            echo "</div>"; 
         }
     } else {
         echo "<p>The entry cannot be found.</p>";
@@ -324,24 +321,6 @@ if (is_post_request()) {
     $stmt->free_result();
 
 
-    //////
-    
-    //if the product is not in the watchlist, else if there is a message to display, else if the user is logged in
-    if (!is_in_watchlist($code)) {
-        echo "<form action=\"addtowatchlist.php\" method=\"post\">\n";
-        echo "<input type=\"hidden\" name=\"id\" value=$code>\n";
-        echo "<input type=\"submit\" class=\"main-button\" value=\"Add To Watchlist\">\n";
-        echo "</form>\n";
-    }
-    // else if (!empty($msg) ) {
-    //     echo "<p>$msg</p>\n";
-    // } 
-    else if (is_logged_in()) {
-        echo "<p>This listing is already in your <a href=\"profile.php\">watchlist</a>.</p><br><br>";
-    }
-
-    echo "<button class=\"submit-edits\"><a href=\"listings.php\">Back to All Listings</a></button>";
-
     $db->close();
-
+    include_once("footer.php");
     ?>

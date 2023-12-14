@@ -6,6 +6,7 @@
     background-color: #FAFAFF;
 }
 
+
 /* Main title */
 h1 {
     text-align: center;
@@ -219,6 +220,7 @@ ul li a {
     position: fixed;
     bottom: 0;
     height: 100px;
+    z-index: 999;
 }
 
 .footer-cell {
@@ -749,13 +751,14 @@ select {
 .reviews-graph {
     margin-bottom: 20px;
     padding: 10px;
-    font-size:1.5rem;
+    font-size: 1.5rem;
     /* background-color: #ddd; */
 }
 
 .bar {
     margin-bottom: 8px;
 }
+
 .posting {
     font-size: 0.75rem;
     text-align: right;
@@ -763,22 +766,25 @@ select {
     margin-right: 5rem;
 }
 
-.rating-decimal{
+.rating-decimal {
     margin-left: 0.5rem;
 }
 
 .category {
     display: inline-block;
-    width: 200px; /* Adjust the width according to your preference */
+    width: 200px;
+    /* Adjust the width according to your preference */
     vertical-align: top;
 }
 
 .stars {
     display: inline-block;
 }
+
 .star-value {
     display: inline-block;
-    margin-left: 10px; /* Add margin for spacing between stars and value */
+    margin-left: 10px;
+    /* Add margin for spacing between stars and value */
     vertical-align: top;
 }
 
@@ -792,16 +798,121 @@ select {
     /* Set color for empty stars */
 }
 
-.filled{
+.filled {
     color: #ffc107;
     /* Set color for filled and half-filled stars to golden */
 }
 
 .half-filled {
-    color: transparent; /* Make the star transparent */
-    border: 1px solid #ffc107; /* Set border to create an outline */
-    text-shadow: none; /* Remove text shadow if present */
+    color: transparent;
+    /* Make the star transparent */
+    border: 1px solid #ffc107;
+    /* Set border to create an outline */
+    text-shadow: none;
+    /* Remove text shadow if present */
 }
+
+.host-listingdetails {
+    text-align: left;
+    display: flex;
+    margin-left: 850px;
+    margin-top: 3rem;
+    margin-right: 100px;
+    margin-bottom: 3rem;
+}
+
+.host-info-listingdetails {
+    display: flex;
+    align-items: center;
+    margin-top: 10px; /* Adjust as needed */
+}
+
+.host-info-listingdetails img {
+    width: 60%;
+    height: auto;
+    margin-bottom: 2rem;
+}
+
+.host-link {
+    margin-left: 1rem;
+    margin-bottom: 1.7rem;
+}
+
+
+.host-link a {
+    font-size: 2rem;
+    font-weight: 300;
+    color: #1c1c1c;
+    /* text-decoration: none; */
+}
+
+.host-link h3 {
+    font-size: 2rem;
+    font-weight: 700;
+}
+
+.name-title {
+    margin-bottom: 10px;
+}
+
+.add-to-watchlist {
+    width: 20%;
+    background-color: #0077b6;
+    color: white;
+    border: none;
+    border-radius: 30px;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    cursor: pointer;
+    transform: all 0.3s ease;
+    margin-top: -60px;
+    margin-bottom: 45px;
+}
+
+.add-to-watchlist:hover {
+    background-color: #005691;
+}
+
+.added-to-watchlist {
+    width: 20%;
+    background-color: #0077b6;
+    color: white;
+    border: none;
+    border-radius: 30px;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    cursor: pointer;
+    transform: all 0.3s ease;
+    margin-top: -60px;
+    /* margin-bottom: 45px; */
+}
+
+.added-to-watchlist:hover {
+    background-color: #005691;
+}
+
+.back-to-listings {
+    margin-top: 10px;
+    margin-left: -60px;
+    border: none;
+    text-decoration: none;
+    color: #1c1c1c;
+    font-size: 1rem;
+    display: flex;
+    position: fixed;
+}
+
+.back-to-listings a {
+    text-decoration: none;
+    color: black;
+}
+
 
 /* HOST PAGE */
 .host-info {
