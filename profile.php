@@ -37,7 +37,7 @@ $stmt->execute();
 $search_result = $stmt->get_result();
 
 if (!empty($msg)) {
-    echo "<p>$msg</p>\n";
+    echo "<p class = \"listings-no-results\">$msg</p>\n";
 }
 
 //start the table of details

@@ -51,7 +51,7 @@ if (is_post_request()) {
     $search_result = $stmt->get_result();
 
     if (!empty($msg)) {
-        echo "<p>$msg</p><br>\n";
+        echo "<p class = \"listings-no-results\">$msg</p><br>\n";
     }
 
 
