@@ -54,11 +54,9 @@ ul li a {
 
 .header-title {
     font-size: 25px;
-    /* text-align: left; */
     padding-top: 2rem;
     padding-left: 2rem;
     margin-left: 80px;
-    /* margin-right: 100px; */
     padding-bottom: 1.5rem;
     font-weight: 700;
     kerning: auto;
@@ -160,10 +158,7 @@ ul li a {
     width: calc(20% - 15px);
     margin-bottom: 45px;
     box-sizing: border-box;
-    /* border: 1px solid #ccc;
-    border-radius: 5px; */
     margin: 5px;
-    /* box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);  */
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -206,13 +201,11 @@ ul li a {
 
 
 .card:hover {
-    /* box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); */
     transform: scale(1.05);
     transition: transform 0.3s ease;
 }
 
 /* FOOTER */
-
 .footer {
     width: 100%;
     border-spacing: 0px;
@@ -234,7 +227,6 @@ ul li a {
 .profile {
     text-align: left;
     justify-content: space-evenly;
-    /* width: 30%; */
     margin-left: 110px;
     display: flex;
 }
@@ -269,7 +261,6 @@ ul li a {
     text-align: center;
     width: 52%;
     background-color: #0077b6;
-    /* color: white; */
     border: none;
     border-radius: 30px;
     padding: 10px 20px;
@@ -308,12 +299,10 @@ ul li a {
 
 .edit-profile-button:hover {
     background-color: #005691;
-    /* border-radius: 30px; */
 }
 
 .profile-watchlists {
     font-size: 3rem;
-    /* margin-left: 0px; */
     margin-top: 100px;
     white-space: nowrap;
     background-color: none;
@@ -392,7 +381,6 @@ ul li a {
     text-align: left;
 }
 
-
 .edit-option input[type="date"],
 .edit-option select {
     width: 50%;
@@ -405,8 +393,6 @@ ul li a {
     margin-right: auto;
     display: flex;
 }
-
-
 
 .edit-option h3 {
     margin-right: 30px;
@@ -541,7 +527,6 @@ ul li a {
 
 .submit-listing:hover {
     background-color: #005691;
-    /* border-radius: 30px; */
 }
 
 select {
@@ -598,7 +583,6 @@ select {
 
 .submit-login:hover {
     background-color: #005691;
-    /* border-radius: 30px; */
 }
 
 .register-button {
@@ -657,7 +641,6 @@ select {
     height: 100%;
     border-radius: 20px;
     object-fit: cover;
-    /* box-shadow: 0 10px 5px rgba(0, 0, 0, 0.1); */
 }
 
 .image-column {
@@ -695,8 +678,6 @@ select {
 }
 
 .star-ratings-css {
-    /* unicode-bidi: bidi-override; */
-    /* color: #c5c5c5; */
     font-size: 20px;
     height: 1em;
     width: auto;
@@ -752,7 +733,6 @@ select {
     margin-bottom: 20px;
     padding: 10px;
     font-size: 1.5rem;
-    /* background-color: #ddd; */
 }
 
 .bar {
@@ -844,7 +824,6 @@ select {
     font-size: 2rem;
     font-weight: 300;
     color: #1c1c1c;
-    /* text-decoration: none; */
 }
 
 .host-link h3 {
@@ -891,7 +870,6 @@ select {
     cursor: pointer;
     transform: all 0.3s ease;
     margin-top: -60px;
-    /* margin-bottom: 45px; */
 }
 
 .added-to-watchlist:hover {
@@ -914,13 +892,10 @@ select {
     color: black;
 }
 
-
 /* HOST PAGE */
 .host-info {
     display: flex;
     align-items: center;
-    /* justify-content: center; */
-    /* text-align: center; */
     margin-left: 20rem;
     margin-top: 2.5rem;
     flex-direction: flex;
@@ -928,7 +903,6 @@ select {
 }
 
 .host-info-card {
-    /* border: 1px solid black; */
     border-radius: 20px;
     padding-left: 50px;
     padding-right: 50px;
@@ -943,8 +917,6 @@ select {
     border-radius: 100%;
     width: 300px;
     height: 300px;
-    /* margin-bottom: 2rem; */
-    /* margin-right:20px; */
 }
 
 .host-img-container {
@@ -964,7 +936,6 @@ select {
 
 .host-details h2 {
     margin: 0;
-    /* margin-bottom: -5px; */
 }
 
 .host-stats {
@@ -976,7 +947,6 @@ select {
     margin-bottom: 50px;
     margin-left: auto;
     margin-right: auto;
-    /* font-size: 5em; */
 }
 
 .host-stats .stats {
@@ -984,7 +954,6 @@ select {
     font-weight: 500;
     margin: 5px;
 }
-
 
 .host-info {
     text-align: left;
@@ -1043,8 +1012,6 @@ select {
     margin: 0 auto;
 }
 
-
-
 /* BUTTON */
 .main-button, .main-button a, .main-button a:visited {
     background-color: #02589e;
@@ -1069,7 +1036,6 @@ textarea {
 .listing-img {
     width: 100%;
 }
-
 
 .thumb-img {
     width: 10%;

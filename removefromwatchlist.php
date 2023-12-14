@@ -5,16 +5,13 @@
     @$msg = trim($_GET["message"]);
 
     $username = $_SESSION["valid_user"];
-
     $message = "";
 
     if (is_in_watchlist($code)) {
         $query = "DELETE FROM watchlist WHERE listing_id = ? AND username = ?";
-        
         $stmt = $db->prepare($query);
         $stmt->bind_param('ss',$code, $username);
-        $stmt->execute();
-                
+        $stmt->execute();     
         $message = urlencode("The model you selected has been removed from your <a href=\"profile.php\">watchlist</a>.");
     }
     

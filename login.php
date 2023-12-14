@@ -31,7 +31,6 @@
 
             // //has to go back to the first of the array
             $result->data_seek(0);
-            // $password = mysqli_fetch_assoc($result)["hashed_password"];
 
             while($row = $result->fetch_assoc()) {
                 $password = $row["hashed_password"];
@@ -39,20 +38,14 @@
             }
 
             if(password_verify($_POST["password"], $password)) {
-                // $neighbourhood = mysqli_fetch_assoc($result)["neighbourhood_preference"];
-
                 $_SESSION["valid_user"] = $username;
                 $_SESSION["neighbourhood_preference"] = $neighbourhood;
-
-                // $_SESSION["neighbourhood_preference"] = mysqli_fetch_assoc($result)["neighbourhood_preference"];
 
                 if (!isset($_SESSION["callback_url"])) {
                     $_SESSION["callback_url"] = "profile.php";
                 }
 
                 redirect_to($_SESSION["callback_url"]);
-                // echo "<p>test - ".$neighbourhood."
-                // </p>";
             }
 
             else {
@@ -66,7 +59,6 @@
         }
 
         $stmt->free_result();
-
     }
 
     $page_title = "Login";
@@ -78,6 +70,7 @@
 ?>
 
 <!-- generate the form -->
+
 <div class="login">
     <h2 class = "user-login">Login</h2>
     <form action="login.php" method="post" class="text-center">
@@ -86,7 +79,6 @@
         <input class = login-password type="password" name="password" value="" placeholder="password"/><br />
         <input type="submit" class="submit-login" value = "Login">
     </form>
-
     <button class="register-button"><a href="register.php">Not registered yet? Register</a></button>
 </div>
 

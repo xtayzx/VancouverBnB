@@ -23,5 +23,4 @@
     	exit("Database query failed.");
     }
   }
-
 ?>

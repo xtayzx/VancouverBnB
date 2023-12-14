@@ -1,39 +1,32 @@
 <?php
-require_once("private/initialize.php");
-date_default_timezone_set('UTC');
+    require_once("private/initialize.php");
+    date_default_timezone_set('UTC');
 
-//Identify what is passed in the URL
-$code = trim($_GET["id"]);
-@$msg = trim($_GET["message"]);
+    //Identify what is passed in the URL
+    $code = trim($_GET["id"]);
+    @$msg = trim($_GET["message"]);
 
-$host_id = '';
+    $host_id = '';
 
-$page_title = "Listing Details";
-require("header.php");
+    $page_title = "Listing Details";
+    require("header.php");
 
-if (is_post_request()) {
-    $t = date("Y-m-d H:i:s");
-    $sql = "INSERT INTO comments (listing_id, timestamp, username, comment) 
-        VALUES (?,?,?,?)";
-    $stmt = mysqli_prepare($db, $sql);
-    mysqli_stmt_bind_param($stmt, "ssss",
-        $code,
-        $t,
-        $_SESSION["valid_user"],
-        $_POST["comment"]);
+    if (is_post_request()) {
+        $t = date("Y-m-d H:i:s");
+        $sql = "INSERT INTO comments (listing_id, timestamp, username, comment) 
+            VALUES (?,?,?,?)";
+        $stmt = mysqli_prepare($db, $sql);
+        mysqli_stmt_bind_param($stmt, "ssss",
+            $code,
+            $t,
+            $_SESSION["valid_user"],
+            $_POST["comment"]);
 
-    $stmt = $db->prepare($sql);
-    $stmt->bind_param('ssss', $code, $t, $_SESSION["valid_user"], $_POST["comment"]);
-    $res = $stmt->execute();
-
-    // if($res){
-    //     // $_SESSION["valid_user"] = $_POST["username"];
-    //     // $_SESSION["neighbourhood_preference"] = $_POST["neighbourhood_preference"];
-    //     // header("Location: listings.php");
-    // }
-
-    $stmt->free_result();
-}
+        $stmt = $db->prepare($sql);
+        $stmt->bind_param('ssss', $code, $t, $_SESSION["valid_user"], $_POST["comment"]);
+        $res = $stmt->execute();
+        $stmt->free_result();
+    }
 ?>
 
 <div class="page-content">
@@ -50,8 +43,9 @@ if (is_post_request()) {
     $stmt->execute();
     $search_result = $stmt->get_result();
 
-
-
+    if (!empty($msg)) {
+        echo "<p class = \"listings-no-results\">$msg</p>\n";
+    }
 
     //start the table of details
     if ($search_result->fetch_row() != 0) {
@@ -59,24 +53,16 @@ if (is_post_request()) {
         //has to go back to the first of the array
         $search_result->data_seek(0);
         while ($row = $search_result->fetch_assoc()) {
-
-            // echo "<img class=\"host-img\" src=\"" . $row["host_picture_url"] . "\">";
     
             $host_id = $row["host_id"];
 
-
             echo "<div class = \"listing-info\">";
-            
             echo "<button class=\"back-to-listings\"><a href=\"listings.php\"> ← Back to All Listings</a></button>";
-
             echo "<div class = \"image-column\">";
+            
             //IMAGE
-    
             echo "<img class=\"image-container\" src=\"" . $row["picture_url"] . "\">";
-
-
             echo "</div>";
-
             echo "<div class = \"info-column\">";
 
             //NAME
@@ -89,15 +75,12 @@ if (is_post_request()) {
                 echo "<input type=\"submit\" class=\"add-to-watchlist\" value=\"+ Add To Watchlist\">\n";
                 echo "</form>\n";
             }
-            // else if (!empty($msg) ) {
-            //     echo "<p>$msg</p>\n";
-            // } 
+
             else if (is_logged_in()) {
-                echo "<a class =\"added-to-watchlist\" href=\"profile.php\">Added to watchlist</a>.<br><br><br>";
+                echo "<a class =\"added-to-watchlist\" href=\"profile.php\">Added to watchlist</a><br><br><br>";
             }
 
             //PRICE
-            // echo "<h3>Price</h3>";
             echo "<h3 class = \"price\">" . $row["price"] . "/ day </h3>";
 
 
@@ -107,7 +90,6 @@ if (is_post_request()) {
             $decimal = $rating - $filledStars;
             $hasHalfStar = ($decimal >= 0.25 && $decimal < 0.75);
 
-            // echo "Rating: $rating, Filled Stars: $filledStars, Has Half Star: $hasHalfStar";
             $threshold = 0.25;
             echo "<div class=\"star-ratings-css\">";
             echo "<span class=\"rating-value\">" . floatval($row['review_scores_rating']) . "</span>";
@@ -124,7 +106,6 @@ if (is_post_request()) {
                 }
             }
             echo "</div>";
-
 
             //ORIGINAL POSTING
             echo "<div class = \"posting\">";
@@ -153,7 +134,6 @@ if (is_post_request()) {
                 "Communication" => floatval($row["review_scores_communication"]),
                 "Location" => floatval($row["review_scores_location"]),
                 "Value" => floatval($row["review_scores_value"]),
-
             ];
 
             $maxValue = 5; // Maximum rating
@@ -191,9 +171,9 @@ if (is_post_request()) {
 
 
             //LOCATION COORDINATES
-            echo "<h3>Lat and Long</h3>";
-            echo "<p>Lat: " . $row["latitude"] . "</p>";
-            echo "<p>Long: " . $row["longitude"] . "</p>";
+            echo "<h3>Approximate Coordinates</h3>";
+            echo "<p>Latitude: " . $row["latitude"] . "</p>";
+            echo "<p>Longitude: " . $row["longitude"] . "</p>";
             echo "<br>";
 
             //PROPERTY TYPE
@@ -211,15 +191,13 @@ if (is_post_request()) {
             echo "<p>" . $row["accommodates"] . "</p>";
             echo "<br>";
 
-
             //NIGHTS
             echo "<h3>Max and Min Nights</h3>";
             echo "<p>Min Nights: " . $row["minimum_nights"] . "</p>";
             echo "<p>Max Nights: " . $row["maximum_nights"] . "</p>";
             echo "<br>";
 
-
-            // COMMENTs
+            // COMMENTS
             echo "<br>";
             echo "<br>";
             echo "<h3>All Comments</h3>";
@@ -236,10 +214,6 @@ if (is_post_request()) {
             $stmt->execute();
             $search_result = $stmt->get_result();
 
-            // if (!empty($msg)) {
-            //     echo "<p>$msg</p>\n";
-            // }
-
             //start the table of details
             if ($search_result->fetch_row() != 0) {
 
@@ -247,14 +221,10 @@ if (is_post_request()) {
                 $search_result->data_seek(0);
 
                 while ($row = $search_result->fetch_assoc()) {
-
                     //NAME
                     echo "<h5>" . $row["username"] . " | " . $row["timestamp"] . "</h5>";
                     echo "<p>" . $row["comment"] . "</p>";
                     echo "<br>";
-
-                    // echo "<div id =”my-map” style = “width:800px; height:600px;”><p>This Map</p></div>";
-    
                 }
             }
 
@@ -268,20 +238,16 @@ if (is_post_request()) {
             if (is_logged_in()) {
                 echo "<form method=\"post\">";
                 echo "<h4>Submit a Comment</h4>";
-                // echo "<label>Enter Comment: </label><br>";
                 echo "<textarea placeholder = \"Write your comment\"class = \"comment-textbox\" name=\"comment\" rows=\"10\" cols=\"80\"></textarea><br><br>";
                 echo "<input type=\"submit\" id=\"submit\" value=\"Submit Comment\" class = \"submit-edits\"/>";
                 echo "</form></div><br>";
             } else {
                 echo "</div><br>";
             }
-
             echo "</div>";
             echo "</div>";
-
         }
     }
-
 
     $host_query = "SELECT * FROM hosts WHERE hosts.host_id = ?";
     $stmt = $db->prepare($host_query);
@@ -295,13 +261,10 @@ if (is_post_request()) {
     $stmt->execute();
     $search_result = $stmt->get_result();
 
-    // if (!empty($msg)) {
-    //     echo "<p>$msg</p><br>\n";
-    // }
-
     if ($search_result->fetch_row() != 0) {
         $search_result->data_seek(0);
         while ($row = $search_result->fetch_assoc()) {
+
             // Display the host's thumbnail image and name
             echo "<div class=\"host-listingdetails\">";
             echo "<div class=\"host-info-listingdetails\">";
@@ -312,14 +275,13 @@ if (is_post_request()) {
             echo "</div>"; 
             echo "</div>"; 
         }
-    } else {
+    } 
+    
+    else {
         echo "<p class = \"listings-no-results\" >The entry cannot be found.</p>";
     }
 
-
     $stmt->free_result();
-
-
     $db->close();
     include_once("footer.php");
-    ?>
+?>

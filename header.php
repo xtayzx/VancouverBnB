@@ -1,9 +1,7 @@
 <?php
-// echo error_reporting();
-
-if(!isset($page_title)) {
-    $page_title = "Title";
-}
+    if(!isset($page_title)) {
+        $page_title = "Title";
+    }
 ?>
 
 <!DOCTYPE html>
@@ -11,19 +9,15 @@ if(!isset($page_title)) {
 
 <head>
     <title>VancouverBnB -
-        <?php echo heading($page_title); ?>
+    <?php echo heading($page_title); ?>
     </title>
     <link rel="stylesheet" href="styles.css">
-
-    <!-- <link rel = "stylesheet" href = "http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.css" /> -->
 </head>
 
 <body>
     <div class="header-size">
-
         <div class="header-container">
             <div class="header-title" h1>vancouverBnB</div>
-
             <div class="menu-font">
                 <a href="home.php">Home</a> |
                 <a href="listings.php">Search Listings</a> |
